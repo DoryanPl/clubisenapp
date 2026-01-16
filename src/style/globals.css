@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@config "../.././tailwind.config.js";
+
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+}
+
+.dark #SwitchDarkMode {
+  filter: invert();
+}
+
+/* Animation de la barre navbar au hover */
+[role="menuitem"][data-active="true"]::after,
+[role="menuitem"][aria-current="page"]::after {
+  transition: all 0.3s ease-in-out;
+}
+
+[role="menuitem"][data-active="true"]:hover::after,
+[role="menuitem"][aria-current="page"]:hover::after {
+  height: 3px !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
