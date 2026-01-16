@@ -13,23 +13,34 @@ module.exports = {
   darkMode: "class",
   plugins: [
     heroui({
-      themes: {
-        light: {
-          colors: {
-            background: "white",
-            foreground: "#262626",
-            secondary: "#fad201",
-          },
-        },
-        dark: {
-          colors: {
-            background: "#262626",
-            foreground: "white",
-            content1: "#262626",
-            secondary: "#fad201",
-          },
-        },
+  themes: {
+    light: {
+      colors: {
+        background: "#f5f5f5",
+        foreground: "#1a1a1a",
+
+        primary: "#ffffff",
+        secondary: "#fad201",
+
+        primaryHover: "#F5F5F5",
+
       },
-    }),
+    },
+
+    dark: {
+      colors: {
+        background: "#0f0f0f",
+        foreground: "#ffffff",
+
+        primary: "#1a1a1a",
+        secondary: "#fad201",
+
+        primaryHover: "#333333",
+
+      },
+    },
+  },
+}),
+
   ],
 };

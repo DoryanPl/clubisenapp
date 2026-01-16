@@ -31,7 +31,7 @@ export function NavBar() {
   const pathname = usePathname();
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} maxWidth="full">
+    <Navbar onMenuOpenChange={setIsMenuOpen} maxWidth="full" className="px-4 py-2 shadow-sm dark:shadow-xl bg-primary">
       <NavbarBrand>
         <Image src={logo} alt="ClubIsen Logo" className="h-8 w-auto" />
       </NavbarBrand>
@@ -109,8 +109,8 @@ function ProfileMenu() {
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
-        <button className="cursor-pointer transition-transform hover:scale-110 p-1 rounded-full bg-background border-2 border-foreground dark:bg-background dark:border-foreground ">
-          <UserRound className="dark:primary" size={20} />
+        <button className="cursor-pointer transition-transform hover:scale-110 p-1 rounded-full border-2 border-foreground">
+          <UserRound size={20} />
         </button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat" onAction={handleAction}>

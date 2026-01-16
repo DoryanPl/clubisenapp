@@ -11,11 +11,11 @@ function PageTitle({ title, description, type }: PageTitleProps) {
   return (
     <div className="pt-6 px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center gap-8">
       <div className="flex-1">
-        <h1 className="text-xl sm:text-2xl font-bold text-foreground dark:text-foreground">
+        <h1 className="text-xl sm:text-2xl font-bold">
           {title}
         </h1>
         {description && (
-          <p className="text-base text-foreground dark:text-foreground">
+          <p className="text-base">
             {description}
           </p>
         )}
@@ -27,19 +27,18 @@ function PageTitle({ title, description, type }: PageTitleProps) {
             isClearable
             radius="lg"
             classNames={{
-              label: "text-foreground dark:text-foreground",
+              
               input: [
                 "bg-transparent",
-                "text-foreground dark:text-foreground",
                 "placeholder:text-foreground/50 dark:placeholder:text-foreground/50",
               ],
               innerWrapper: "bg-transparent",
               inputWrapper: [
                 "shadow-sm",
-                "bg-background",
-                "dark:bg-background",
-                "hover:bg-background",
-                "dark:hover:bg-background",
+                "!bg-primary",
+                "!dark:bg-primary",
+                "data-[hover=true]:!bg-primaryHover",
+                "dark:data-[hover=true]:!bg-primaryHover",
                 "border border-secondary",
                 "dark:border-secondary",
                 "focus-within:border-secondary",
@@ -48,13 +47,13 @@ function PageTitle({ title, description, type }: PageTitleProps) {
             }}
             placeholder={`Rechercher un ${type}...`}
             startContent={
-              <SearchIcon size={16} className="text-foreground/50 mb-0.5 pointer-events-none flex-shrink-0" />
+              <SearchIcon size={16} className="text-foreground mb-0.5 pointer-events-none flex-shrink-0" />
             }
             onValueChange={(value) => onSearch(value)}
           />
         </div>
 
-        <Button color="secondary" className="text-background font-bold whitespace-nowrap flex-shrink-0" startContent={<Plus size={20} />}>
+        <Button color="secondary" className="text-primary dark:text-primary font-bold whitespace-nowrap flex-shrink-0" startContent={<Plus size={20} />}>
           <span className="hidden sm:inline">Créer un {type}</span>
         </Button>
       </div>

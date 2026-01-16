@@ -2,8 +2,9 @@
 
 import React from 'react';
 import PageTitle from '@/components/PageTitle';
+import CardMembre from '@/components/CardMembre';
 
-export default function ClubsPage() {
+export default function MembresPage() {
 
   return (
     <>
@@ -12,6 +13,7 @@ export default function ClubsPage() {
         description=" étudiants actifs dans les différents clubs du campus."
         type="membre"
       />
+      <CardMembre />
     </>
   );
 }
