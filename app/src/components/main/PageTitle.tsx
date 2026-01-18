@@ -1,5 +1,5 @@
 import { Input, Button } from "@heroui/react"; 
-import { SearchIcon, Plus } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 
 interface PageTitleProps {
   title: string;
@@ -27,12 +27,12 @@ function PageTitle({ title, description, type, onSearch }: PageTitleProps) {
           <Input
             isClearable
             radius="lg"
-           
             placeholder={`Rechercher un ${type}...`}
-            startContent={
-              <SearchIcon size={16} className="text-foreground mb-0.5 pointer-events-none flex-shrink-0" />
-            }
+            startContent={<Search size={18} />}
             onValueChange={(value) => onSearch?.(value)}
+            classNames={{
+							inputWrapper: "border border-default-100 shadow-sm dark:shadow-xl bg-primary focus-within:bg-primary",
+						}}
           />
         </div>
 

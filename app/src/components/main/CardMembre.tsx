@@ -27,7 +27,7 @@ function CardMembre({ searchTerm = '' }: CardMembreProps) {
             isPressable
             key={membre.id}
             shadow="sm"
-            className="relative border border-default-200/80 hover:border-secondary transition-all hover:shadow-[0_0_15px_rgba(250,210,1,0.3)] flex flex-col w-full"
+            className="bg-primary relative border border-default-100 hover:border-secondary transition-all hover:shadow-lg hover:shadow-secondary/50  flex flex-col w-full"
             onPress={() => console.log("item pressed")}>
             <span
               className={`absolute top-3 right-3 h-3 w-3 rounded-full shadow-[0_0_0_6px_rgba(0,0,0,0.04)] ${

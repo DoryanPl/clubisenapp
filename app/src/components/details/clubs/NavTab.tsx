@@ -27,10 +27,10 @@ export default function ClubNavTab(props: ClubID) {
         color="secondary"
         className="w-full sm:w-auto"
         classNames={{
-          tabList: "bg-primary rounded-3xl p-2 shadow-sm dark:shadow-xl w-full sm:w-auto overflow-x-auto",
-          tab: "px-6 py-3 rounded-xl whitespace-nowrap",
+          tabList: "bg-primary rounded-3xl p-2 border border-foreground/10 shadow-sm dark:shadow-xl w-full sm:w-auto overflow-x-auto",
+          tab: "px-6 py-3 rounded-xl whitespace-nowrap !opacity-100 transition-colors",
           cursor: "bg-secondary/80 rounded-xl shadow-md",
-          tabContent: "text-foreground/70 group-data-[selected=true]:text-white font-medium"
+          tabContent: "text-foreground/70 group-data-[selected=true]:text-white group-hover:text-foreground font-bold transition-colors"
         }}
       >
         {(item) => (
@@ -43,7 +43,7 @@ export default function ClubNavTab(props: ClubID) {
               </div>
             }
           >
-            <Card className="mt-4 bg-primary">
+            <Card className="mt-4 bg-primary/50 border border-default-100 shadow-sm dark:shadow-xl">
               <CardBody>
                 {item.content}
               </CardBody>

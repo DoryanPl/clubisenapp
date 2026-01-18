@@ -13,7 +13,7 @@ function CardClub({ searchTerm = '' }: CardClubProps) {
     club.ClubNom.toLowerCase().includes(searchTerm.toLowerCase()) ||
     club.ClubDesc.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const getRedirection = (id: string) => `/clubs/details/${id}`;
+  const getRedirection = (id: number) => `/clubs/details/${id}`;
 
   return(
     <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-6 px-4 sm:px-6 lg:px-8">
@@ -25,7 +25,7 @@ function CardClub({ searchTerm = '' }: CardClubProps) {
           <Card 
             isPressable 
             shadow="sm" 
-            className="relative border border-default-200/80 hover:border-secondary transition-all hover:shadow-[0_0_15px_rgba(250,210,1,0.3)] flex flex-col group w-full" 
+            className="bg-primary relative border border-default-100 hover:border-secondary transition-all hover:shadow-lg hover:shadow-secondary/50 flex flex-col group w-full" 
             onPress={() => console.log("item pressed")}>
 
             <CardHeader className="p-0 m-0 flex-shrink-0 relative w-full h-[120px] sm:h-[140px] lg:h-[150px] overflow-hidden">
