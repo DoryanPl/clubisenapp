@@ -23,8 +23,8 @@ export default function SwitchDarkMode() {
         id="SwitchDarkMode"
         src={DarkModeIcon}
         alt="Dark mode toggle"
-        width={24}
-        height={24}
+        width={32}
+        height={32}
       />
     </Button>
   );

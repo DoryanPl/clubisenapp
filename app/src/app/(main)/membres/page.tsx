@@ -1,10 +1,11 @@
 'use client';
 
 import React from 'react';
-import PageTitle from '@/components/PageTitle';
-import CardMembre from '@/components/CardMembre';
+import PageTitle from '@/components/main/PageTitle';
+import CardMembre from '@/components/main/CardMembre';
 
 export default function MembresPage() {
+  const [searchTerm, setSearchTerm] = React.useState('');
 
   return (
     <>
@@ -12,8 +13,10 @@ export default function MembresPage() {
         title="Annuaire des membres" 
         description=" étudiants actifs dans les différents clubs du campus."
         type="membre"
+        onSearch={setSearchTerm}
       />
-      <CardMembre />
+      <CardMembre searchTerm={searchTerm}/>
+
     </>
   );
 }

@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 
 export default function useDarkMode() {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== "undefined") {
-      if (localStorage.getItem("theme") === "dark" || 
-         (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-        return "dark";
-      }
-    }
-    return "light";
-  });
+  // Render the same markup on server and client, then sync theme after mount
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
+    const preferred = (() => {
+      if (typeof window === "undefined") return "light";
+      const stored = localStorage.getItem("theme");
+      if (stored === "dark" || stored === "light") return stored;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    })();
+
+    setTheme(preferred);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
     const root = window.document.documentElement;
-    
     if (theme === "dark") {
       root.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -23,5 +27,5 @@ export default function useDarkMode() {
     }
   }, [theme]);
 
-  return [theme, setTheme];
+  return [theme, setTheme] as const;
 }

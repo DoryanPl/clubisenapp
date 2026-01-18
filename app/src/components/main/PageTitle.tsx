@@ -5,9 +5,10 @@ interface PageTitleProps {
   title: string;
   description?: string;
   type?: string;
+  onSearch?: (value: string) => void;
 }
 
-function PageTitle({ title, description, type }: PageTitleProps) {
+function PageTitle({ title, description, type, onSearch }: PageTitleProps) {
   return (
     <div className="pt-6 px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center gap-8">
       <div className="flex-1">
@@ -26,34 +27,16 @@ function PageTitle({ title, description, type }: PageTitleProps) {
           <Input
             isClearable
             radius="lg"
-            classNames={{
-              
-              input: [
-                "bg-transparent",
-                "placeholder:text-foreground/50 dark:placeholder:text-foreground/50",
-              ],
-              innerWrapper: "bg-transparent",
-              inputWrapper: [
-                "shadow-sm",
-                "!bg-primary",
-                "!dark:bg-primary",
-                "data-[hover=true]:!bg-primaryHover",
-                "dark:data-[hover=true]:!bg-primaryHover",
-                "border border-secondary",
-                "dark:border-secondary",
-                "focus-within:border-secondary",
-                "!cursor-text",
-              ],
-            }}
+           
             placeholder={`Rechercher un ${type}...`}
             startContent={
               <SearchIcon size={16} className="text-foreground mb-0.5 pointer-events-none flex-shrink-0" />
             }
-            onValueChange={(value) => onSearch(value)}
+            onValueChange={(value) => onSearch?.(value)}
           />
         </div>
 
-        <Button color="secondary" className="text-primary dark:text-primary font-bold whitespace-nowrap flex-shrink-0" startContent={<Plus size={20} />}>
+        <Button color="secondary" className="text-white bg-secondary/80 font-bold whitespace-nowrap flex-shrink-0" startContent={<Plus size={20} />}>
           <span className="hidden sm:inline">Créer un {type}</span>
         </Button>
       </div>

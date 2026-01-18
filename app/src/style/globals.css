@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
-@config "../.././tailwind.config.js";
+@config "../../tailwind.config.js";
 
 body {
   background: var(--background);
@@ -10,6 +10,10 @@ body {
 
 .dark #SwitchDarkMode {
   filter: invert();
+}
+
+header {
+  padding: 0;
 }
 
 /* Animation de la barre navbar au hover */
