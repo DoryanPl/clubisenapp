@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card, CardBody } from '@heroui/react';
 import { TrendingUp, TrendingDown, Wallet } from 'lucide-react';
-import { budgetExample } from '@/types/Budget/Budget';
+import { budgetExample, budgetSummaryExample } from '@/types/Budget/Budget';
 import type { ClubID } from '@/types/Club/Club';
 
 interface CardBudgetProps {
@@ -17,7 +17,7 @@ export function CardBudget({ title, amount, type, icon }: CardBudgetProps) {
   const colorClass = type === 'income' ? 'text-blue-600' : type === 'expense' ? 'text-danger' : 'text-success';
   
   return (
-    <Card className="bg-primary/90 border border-default-100 shadow-sm dark:shadow-xl">
+    <Card className="bg-primary/90 border border-default-200 shadow-sm dark:shadow-xl">
       <CardBody className="gap-2 p-3 sm:p-6">
         <div className="flex items-center gap-2 text-foreground">
           {icon && (<span className="inline-flex">{icon}</span>)}
@@ -32,17 +32,14 @@ export function CardBudget({ title, amount, type, icon }: CardBudgetProps) {
 }
 
 export default function CardTotalBudget(props: ClubID) {
-  const clubIDProps: ClubID = { id: props.id };
+  const clubID = props.id;
 
-  const totalIncome = budgetExample
-    .filter(b => b.type === 'income')
-    .reduce((sum, b) => sum + b.amount, 0);
+  // Utiliser BudgetSummary pour obtenir les données du club
+  const clubSummary = budgetSummaryExample.find(summary => summary.ClubID === clubID);
 
-  const totalExpense = budgetExample
-    .filter(b => b.type === 'expense')
-    .reduce((sum, b) => sum + Math.abs(b.amount), 0);
-
-  const totalTresor = totalIncome - totalExpense;
+  const totalIncome = clubSummary?.totalIncome ?? 0;
+  const totalExpense = clubSummary?.totalExpense ?? 0;
+  const totalTresor = clubSummary?.totalTreasury ?? 0;
 
   return (
     <div className="flex flex-col gap-6">

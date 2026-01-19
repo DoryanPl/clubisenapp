@@ -186,11 +186,11 @@ export default function ListMembre(props: ClubID) {
 						onValueChange={onSearchChange}
 						className="w-full lg:w-96"
 						classNames={{
-							inputWrapper: "border border-default-100 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20",
+							inputWrapper: "border border-default-200 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20",
 						}}
                     
 					/>
-					<div className="p-2 rounded-xl bg-primary w-full lg:w-auto border border-default-100 shadow-sm dark:shadow-xl">
+					<div className="p-2 rounded-xl bg-primary w-full lg:w-auto border border-default-200 shadow-sm dark:shadow-xl">
 						<div className="flex flex-wrap items-center gap-2 justify-center space-around">
 							<div className="flex items-center gap-2 ">
 								<Funnel size={18} />
@@ -306,13 +306,13 @@ export default function ListMembre(props: ClubID) {
 						onChange={setPage}
 						size="sm"
 						classNames={{
-							wrapper: "border border-default-100 shadow-sm dark:shadow-xl gap-0.5 sm:gap-1",
+							wrapper: "border border-default-200 shadow-sm dark:shadow-xl gap-0.5 sm:gap-1",
 						}}
 					/>
 				</div>
 				
 				<div className="flex flex-col items-center sm:items-end gap-1 sm:gap-2">
-					<span className="text-foreground text-xs sm:text-sm whitespace-nowrap">Membres/page:</span>
+					<span className="text-foreground hidden sm:block sm:text-sm whitespace-nowrap">Membres/page:</span>
 					<Select
 						selectedKeys={new Set([rowsPerPage.toString()])}
 						onChange={(e) => {
@@ -321,10 +321,10 @@ export default function ListMembre(props: ClubID) {
 						}}
 						size="sm"
 						disallowEmptySelection
-						className="	w-20"
+						className="	w-20 pt-2 sm:pt-0"
 						classNames={{
 							listbox: "bg-primary",
-							trigger: "bg-primary border border-default-100 shadow-sm dark:shadow-xl",
+							trigger: "bg-primary border border-default-200 shadow-sm dark:shadow-xl",
 						}}
 					>
 						{MemberPerPage.map((num) => (

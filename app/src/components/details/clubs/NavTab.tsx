@@ -7,6 +7,7 @@ import TabMembre from './Membre/TabMembre';
 import TabOverview from './Overview/TabOverview';
 import TabBudget from './Budget/TabBudget';
 import type { ClubID } from '@/types/Club/Club';
+import TabHeure from './Heure/TabHeure';
 
 export default function ClubNavTab(props: ClubID) {
   const clubIDProps: ClubID = { id: props.id };
@@ -15,6 +16,7 @@ export default function ClubNavTab(props: ClubID) {
     { id: 'overview', label: 'Vue d\'ensemble', icon: Eye, content: ( <TabOverview {...clubIDProps} />) },
     { id: 'members', label: 'Membres', icon: Users, content: ( <TabMembre {...clubIDProps} />) },  
     { id: 'budget', label: 'Budget', icon: Wallet, content: ( <TabBudget {...clubIDProps} />)  },
+    { id: 'heure', label: 'Heures', icon: Wallet, content: ( <TabHeure {...clubIDProps} />)  },
   ];
 
 
