@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, 
-	Chip, Input, Pagination, Select, SelectItem, DropdownItem, DropdownMenu, DropdownTrigger, Button, Dropdown } from "@heroui/react";
+	Chip, Input, DropdownItem, DropdownMenu, DropdownTrigger, Button, Dropdown } from "@heroui/react";
 import { FilterButton } from '@/components/FilterButton';
 import { Eye, Edit, Trash2, Search, MoreVertical, Users } from 'lucide-react';
 import type { ClubID } from '@/types/Club/Club';
@@ -16,6 +16,12 @@ const columns = [
 	{ label: "EMAIL", id: "email" },
 	{ label: "STATUT", id: "status" },
 	{ label: "ACTIONS", id: "actions" },
+];
+
+const detailsItem = [
+  { key: "view", label: "Détails", icon: Eye },
+  { key: "edit", label: "Éditer", icon: Edit },
+  { key: "delete", label: "Supprimer", icon: Trash2, isDanger: true },
 ];
 
 const statusColorMap = [
@@ -156,18 +162,21 @@ export default function ListMembre(props: ClubID) {
 						</DropdownTrigger>
 						<DropdownMenu
 							classNames={{
-								list: "bg-primary p-2 rounded-lg shadow-lg border border-default-200",
+								list: "bg-primary p-2 rounded-lg  border border-default-200",
 							}}	
 						>
-							<DropdownItem key="view" startContent={<Eye size={16} />}>
-								Détails
-							</DropdownItem>
-							<DropdownItem key="edit" startContent={<Edit size={16} />}>
-								Éditer
-							</DropdownItem>
-							<DropdownItem key="delete" startContent={<Trash2 size={16} />} color="danger">
-								Supprimer
-							</DropdownItem>
+							{detailsItem.map((item) => {
+								const Icon = item.icon;
+								return (
+									<DropdownItem 
+										key={item.key} 
+										startContent={<Icon size={16} />}
+										color={item.isDanger ? "danger" : "default"}
+									>
+										{item.label}
+									</DropdownItem>
+								);
+							})}
 						</DropdownMenu>
 					</Dropdown>
 				);
@@ -299,7 +308,7 @@ export default function ListMembre(props: ClubID) {
 				</TableHeader>
 				<TableBody emptyContent="Aucun membre trouvé" items={items}>
 					{(item) => (
-						<TableRow key={item.id}>
+						<TableRow key={item.ClubID}>
 							{(columnKey) => <TableCell>{renderCell(item, String(columnKey))}</TableCell>}
 						</TableRow>
 					)}

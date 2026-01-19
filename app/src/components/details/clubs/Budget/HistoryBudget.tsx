@@ -18,7 +18,7 @@ function TransactionItem({ transaction }: TransactionItemProps) {
   const isIncome = transaction.type === 'income';
   const colorClass = isIncome ? 'text-emerald-500' : 'text-red-500';
   const bgClass = isIncome ? 'bg-emerald-200 dark:bg-emerald-500/10' : 'bg-red-200 dark:bg-red-500/10';
-  const borderClass = isIncome ? 'border-emerald-200 dark:border-emerald-500/20' : 'border-red-200 dark:border-red-500/20';
+  const borderClass = isIncome ? 'border-emerald-500/40 dark:border-emerald-500/20' : 'border-red-500/40 dark:border-red-500/20';
   
   return (
     <div className={`flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 ${bgClass} rounded-lg sm:rounded-2xl border ${borderClass}`}>

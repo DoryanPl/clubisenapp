@@ -16,19 +16,19 @@ interface HeureItemProps {
 const heureStatus = {
   accepted: {
     icon: <CircleCheck size={20} className="text-emerald-500 font-bold" />,
-    background: 'bg-emerald-50 dark:bg-emerald-500/10',
+    background: 'bg-emerald-100 dark:bg-emerald-500/10',
     color: 'text-emerald-500',
     label: 'Accepté',
   },
   waited: {
     icon: <Clock size={20} className="text-yellow-500 font-bold" />,
-    background: 'bg-yellow-50 dark:bg-yellow-500/10',
+    background: 'bg-yellow-100 dark:bg-yellow-500/10',
     color: 'text-yellow-500',
     label: 'En attente',
   },
   rejected: {
     icon: <CircleX size={20} className="text-red-500 font-bold" />,
-    background: 'bg-red-50 dark:bg-red-500/10',
+    background: 'bg-red-100 dark:bg-red-500/10',
     color: 'text-red-500',
     label: 'Refusé',
   },
