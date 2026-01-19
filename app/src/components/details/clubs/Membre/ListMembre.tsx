@@ -1,13 +1,13 @@
 'use client';
 
 import React from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Dropdown, DropdownTrigger, DropdownMenu,
-	DropdownItem, Button, Input, Pagination, Select, SelectItem
-} from "@heroui/react";
-import { Eye, Edit, Trash2, Search, MoreVertical, Funnel } from 'lucide-react';
-import { membresExample } from "@/types/Membre/Membre";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, 
+	Chip, Input, Pagination, Select, SelectItem, DropdownItem, DropdownMenu, DropdownTrigger, Button, Dropdown } from "@heroui/react";
+import { FilterButton } from '@/components/FilterButton';
+import { Eye, Edit, Trash2, Search, MoreVertical, Users } from 'lucide-react';
 import type { ClubID } from '@/types/Club/Club';
-import { div } from "framer-motion/client";
+import { membresExample } from '@/types/Membre/Membre';
+import { PaginationSection } from "@/components/PaginationSection";
 
 const columns = [
 	{ label: "NOM", id: "nom"},
@@ -19,8 +19,8 @@ const columns = [
 ];
 
 const statusColorMap = [
-    { statut: "Actif", color: "success" },
-	{ statut: "Inactif", color: "danger" },
+    { statut: "Actif", className: "bg-emerald-200 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/30" },
+	{ statut: "Inactif", className: "bg-red-200 dark:bg-red-500/10 text-red-800 dark:text-red-300 border border-red-300 dark:border-red-500/30" },
 ];
 
 const MemberPerPage = [5, 10, 15];
@@ -28,10 +28,7 @@ const defaultRowsPerPage = 5;
 
 const INITIAL_VISIBLE_COLUMNS = ["nom", "role", "classe", "status", "actions"];
 
-
 export default function ListMembre(props: ClubID) {
-	const clubID = props.id;
-
 	const [filterValue, setFilterValue] = React.useState("");
 	const [statusFilter, setStatusFilter] = React.useState("all");
 	const [classeFilter, setClasseFilter] = React.useState("all");
@@ -40,15 +37,31 @@ export default function ListMembre(props: ClubID) {
 	const [page, setPage] = React.useState(1);
     const [visibleColumns, setVisibleColumns] = React.useState(new Set(INITIAL_VISIBLE_COLUMNS));
 
-	const hasSearchFilter = Boolean(filterValue);
+	const clubID = props.id;
 
 	const uniqueClasses = React.useMemo(() => {
-		return [...new Set(membresExample.map(m => m.classe))].sort();
+		const classes = [...new Set(membresExample.map(m => m.classe))].sort();
+		return [
+			{ key: 'all', label: 'Toutes' },
+			...classes.map(c => ({ key: c, label: c }))
+		];
 	}, []);
 
 	const uniqueRoles = React.useMemo(() => {
-		return [...new Set(membresExample.map(m => m.role))].sort();
+		const roles = [...new Set(membresExample.map(m => m.role))].sort();
+		return [
+			{ key: 'all', label: 'Tous' },
+			...roles.map(r => ({ key: r, label: r }))
+		];
 	}, []);
+
+	const statutTypes = React.useMemo(() => [
+		{ key: 'all', label: 'Tous' },
+		{ key: 'actif', label: 'Actif' },
+		{ key: 'inactif', label: 'Inactif' },
+	], []);
+
+	const hasSearchFilter = Boolean(filterValue);
 
 	const filteredItems = React.useMemo(() => {
 		let filtered = [...membresExample];
@@ -62,7 +75,7 @@ export default function ListMembre(props: ClubID) {
 
 		if (statusFilter !== "all") {
 			filtered = filtered.filter((member) => {
-				const status = member.isActive ? "Actif" : "Inactif";
+				const status = member.isActive ? "actif" : "inactif";
 				return statusFilter === status;
 			});
 		}
@@ -112,7 +125,7 @@ export default function ListMembre(props: ClubID) {
 					<div className="flex flex-col">
 						<p className="text-bold text-sm capitalize">{cellValue}</p>
 					</div>
-				);
+				); 
 			case "classe":
 				return (
 					<div className="flex flex-col">
@@ -124,8 +137,9 @@ export default function ListMembre(props: ClubID) {
 				const colorInfo = statusColorMap.find(s => s.statut === status);
 				return (
 					<Chip
-						className="text-bold"
-						color={(colorInfo?.color as any) || "default"}
+						classNames={{
+							base: colorInfo?.className
+						}}
 						size="sm"
 						variant="flat"
 					>
@@ -134,13 +148,17 @@ export default function ListMembre(props: ClubID) {
 				);
 			case "actions":
 				return (
-					<Dropdown>
+					<Dropdown className='bg-transparent border-0 shadow-none'>
 						<DropdownTrigger>
 							<Button isIconOnly size="sm" variant="light">
 								<MoreVertical className="text-foreground" size={18} />
 							</Button>
 						</DropdownTrigger>
-						<DropdownMenu>
+						<DropdownMenu
+							classNames={{
+								list: "bg-primary p-2 rounded-lg shadow-lg border border-default-200",
+							}}	
+						>
 							<DropdownItem key="view" startContent={<Eye size={16} />}>
 								Détails
 							</DropdownItem>
@@ -175,7 +193,7 @@ export default function ListMembre(props: ClubID) {
 	const topContent = React.useMemo(() => {
 		return (
 			<div className="flex flex-col gap-4">
-				<div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+				<div className="flex flex-col sm:flex-row gap-2 sm:gap-3 sm:items-center sm:justify-between">
 					<Input
 						isClearable
                         radius="lg"
@@ -190,185 +208,103 @@ export default function ListMembre(props: ClubID) {
 						}}
                     
 					/>
-					<div className="p-2 rounded-xl bg-primary w-full lg:w-auto border border-default-200 shadow-sm dark:shadow-xl">
-						<div className="flex flex-wrap items-center gap-2 justify-center space-around">
-							<div className="flex items-center gap-2 ">
-								<Funnel size={18} />
-								<span className="text-sm">
-									Filtres
-								</span>
-							</div>
-
-							{/* Filtres */}
-							{/* Statut, Classe, Rôle */}
-							<div className="flex items-center gap-2 flex-wrap ">
-								<Dropdown>
-									<DropdownTrigger className="flex bg-background border border-default-100 shadow-sm dark:shadow-xl">
-										<Button size="sm" variant="flat">
-											Statut
-										</Button>
-									</DropdownTrigger>
-									<DropdownMenu
-										aria-label="Filtre de statut"
-										closeOnSelect={true}
-										selectedKeys={new Set([statusFilter])}
-										selectionMode="single"
-										onSelectionChange={(keys) => {
-											setStatusFilter(Array.from(keys)[0] as string);
-											setPage(1);
-										}}
-										classNames={{
-											list: "bg-primary",
-										}}
-									>
-										<DropdownItem key="all">Tous</DropdownItem>
-										<DropdownItem key="Actif">Actif</DropdownItem>
-										<DropdownItem key="Inactif">Inactif</DropdownItem>
-									</DropdownMenu>
-								</Dropdown>
-								<Dropdown>
-									<DropdownTrigger className="flex bg-background border border-default-100 shadow-sm dark:shadow-xl">
-										<Button size="sm" variant="flat">
-											Classe
-										</Button>
-									</DropdownTrigger>
-									<DropdownMenu
-										aria-label="Filtre de classe"
-										closeOnSelect={true}
-										selectedKeys={new Set([classeFilter])}
-										selectionMode="single"
-										onSelectionChange={(keys) => {
-											setClasseFilter(Array.from(keys)[0] as string);
-											setPage(1);
-										}}
-									>
-										<DropdownItem key="all">Toutes</DropdownItem>
-										<>
-											{uniqueClasses.map((classe) => (
-												<DropdownItem key={classe} textValue={classe}>
-													{classe}
-												</DropdownItem>
-											))}
-										</>
-									</DropdownMenu>
-								</Dropdown>
-								<Dropdown>
-									<DropdownTrigger className="flex bg-background border border-default-100 shadow-sm dark:shadow-xl">
-										<Button size="sm" variant="flat">
-											Rôle
-										</Button>
-									</DropdownTrigger>
-									<DropdownMenu
-										aria-label="Filtre de rôle"
-										closeOnSelect={true}
-										selectedKeys={new Set([roleFilter])}
-										selectionMode="single"
-										onSelectionChange={(keys) => {
-											setRoleFilter(Array.from(keys)[0] as string);
-											setPage(1);
-										}}
-									>
-										<DropdownItem key="all">Tous</DropdownItem>
-										<>
-											{uniqueRoles.map((role) => (
-												<DropdownItem key={role} textValue={role}>
-													{role}
-												</DropdownItem>
-											))}
-										</>
-									</DropdownMenu>
-								</Dropdown>
-							</div>
-						</div>
+						
+					{/* Filtres */}
+					{/* Statut, Classe, Rôle */}
+					<div className="flex gap-2 w-full sm:w-auto">
+						<FilterButton
+							label="Statut"
+							options={statutTypes}
+							selectedKeys={new Set([statusFilter])}
+							onSelectionChange={(keys) => {
+								setStatusFilter(Array.from(keys)[0] as string);
+								setPage(1);
+							}}
+							className="flex-1 sm:flex-none"
+						/>
+						<FilterButton
+							label="Classe"
+							options={uniqueClasses}
+							selectedKeys={new Set([classeFilter])}
+							onSelectionChange={(keys) => {
+								setClasseFilter(Array.from(keys)[0] as string);
+								setPage(1);
+							}}
+							className="flex-1 sm:flex-none"
+						/>
+						<FilterButton
+							label="Rôle"
+							options={uniqueRoles}
+							selectedKeys={new Set([roleFilter])}
+							onSelectionChange={(keys) => {
+								setRoleFilter(Array.from(keys)[0] as string);
+								setPage(1);
+							}}
+							className="flex-1 sm:flex-none"
+						/>
 					</div>
 				</div>
-				
 			</div>
 		);
-	}, [filterValue, statusFilter, classeFilter, roleFilter, onSearchChange, onClear, uniqueClasses, uniqueRoles]);
+	}, [filterValue, statusFilter, classeFilter, roleFilter, onSearchChange, onClear, uniqueClasses, uniqueRoles, statutTypes]);
 
     {/* Bottom Tableau (Pagination/count/nb per page) */}
 	const bottomContent = React.useMemo(() => {
 		return (
-			<div className="grid grid-cols-3 items-center gap-4 py-2 px-2">
-				<div className="flex flex-col items-center sm:items-start mt-3">
-					<span className="text-foreground text-xs sm:text-sm">Total: </span>
-					<span className="font-bold text-foreground text-xs sm:text-sm">{filteredItems.length} membres</span>
-				</div>
-
-				<div className="flex justify-center mt-3">
-					<Pagination
-						isCompact
-						showControls
-						color="primary"
-						page={page}
-						total={pages}
-						onChange={setPage}
-						size="sm"
-						classNames={{
-							wrapper: "border border-default-200 shadow-sm dark:shadow-xl gap-0.5 sm:gap-1",
-						}}
-					/>
-				</div>
-				
-				<div className="flex flex-col items-center sm:items-end gap-1 sm:gap-2">
-					<span className="text-foreground hidden sm:block sm:text-sm whitespace-nowrap">Membres/page:</span>
-					<Select
-						selectedKeys={new Set([rowsPerPage.toString()])}
-						onChange={(e) => {
-						setRowsPerPage(Number(e.target.value));
-						setPage(1);
-						}}
-						size="sm"
-						disallowEmptySelection
-						className="	w-20 pt-2 sm:pt-0"
-						classNames={{
-							listbox: "bg-primary",
-							trigger: "bg-primary border border-default-200 shadow-sm dark:shadow-xl",
-						}}
-					>
-						{MemberPerPage.map((num) => (
-						<SelectItem key={num}>
-							{num.toString()}
-						</SelectItem>
-						))}
-					</Select>
-				</div>
-			</div>
+			<PaginationSection
+				totalItems={filteredItems.length}
+				itemLabel="membres"
+				rowsPerPage={rowsPerPage}
+				rowsPerPageOptions={MemberPerPage}
+				onRowsPerPageChange={(value) => {
+					setRowsPerPage(value);
+					setPage(1);
+				}}
+				page={page}
+				totalPages={pages}
+				onPageChange={setPage}
+			/>
 		);
 	}, [filteredItems.length, page, pages, rowsPerPage]);
 
 	return (
-        <Table
-            isHeaderSticky
-            aria-label="Table des membres du club"
-            bottomContent={bottomContent}
-            bottomContentPlacement="outside"
-            topContent={topContent}
-            topContentPlacement="outside"
-            classNames={{
-                wrapper: "max-h-[600px] bg-primary/90 border border-default-100 shadow-sm dark:shadow-xl",
-                tbody: "bg-primary/90",
-                th:"bg-background/90 shadow-sm dark:shadow-xl"
-            }}
-        >
-            <TableHeader columns={headerColumns} >
-                {(column) => (
-                    <TableColumn
-                        key={column.id}
-                        align={column.id === "actions" ? "center" : "start"}
-                    >
-                        {column.label}
-                    </TableColumn>
-                )}
-            </TableHeader>
-            <TableBody emptyContent="Aucun membre trouvé" items={items}>
-                {(item) => (
-                    <TableRow key={item.id}>
-                        {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
-                    </TableRow>
-                )}
-            </TableBody>
-        </Table>
+		<div className="w-full bg-primary border border-default-200 shadow-sm dark:shadow-xl rounded-xl p-3 sm:p-6">
+			<div className="flex items-center gap-2 text-foreground justify-center sm:justify-start pb-3">
+				<span className="inline-flex"><Users size={16} className="sm:w-5 sm:h-5" /></span>
+				<span className="text-base sm:text-lg font-bold text-foreground">Activités des heures</span>
+        	</div>
+
+			<Table
+				isHeaderSticky
+				aria-label="Table des membres du club"
+				bottomContent={bottomContent}
+				bottomContentPlacement="outside"
+				topContent={topContent}
+				topContentPlacement="outside"
+				classNames={{
+					wrapper: "max-h-[600px] bg-primary border border-default-200 shadow-sm dark:shadow-xl",
+					tbody: "bg-primary",
+					th:"bg-background shadow-sm dark:shadow-xl",
+				}}
+			>
+				<TableHeader columns={headerColumns} >
+					{(column) => (
+						<TableColumn
+							key={column.id}
+							align={column.id === "actions" ? "center" : "start"}
+						>
+							{column.label}
+						</TableColumn>
+					)}
+				</TableHeader>
+				<TableBody emptyContent="Aucun membre trouvé" items={items}>
+					{(item) => (
+						<TableRow key={item.id}>
+							{(columnKey) => <TableCell>{renderCell(item, String(columnKey))}</TableCell>}
+						</TableRow>
+					)}
+				</TableBody>
+			</Table>
+		</div>
 	);
 }

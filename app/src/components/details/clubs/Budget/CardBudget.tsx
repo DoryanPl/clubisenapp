@@ -1,35 +1,10 @@
 'use client';
 
 import React from 'react';
-import { Card, CardBody } from '@heroui/react';
 import { TrendingUp, TrendingDown, Wallet } from 'lucide-react';
-import { budgetExample, budgetSummaryExample } from '@/types/Budget/Budget';
+import {budgetSummaryExample } from '@/types/Budget/Budget';
 import type { ClubID } from '@/types/Club/Club';
-
-interface CardBudgetProps {
-  title: string;
-  amount: number;
-  type: 'income' | 'expense' | 'treasury';
-  icon?: React.ReactNode;
-}
-
-export function CardBudget({ title, amount, type, icon }: CardBudgetProps) {
-  const colorClass = type === 'income' ? 'text-blue-600' : type === 'expense' ? 'text-danger' : 'text-success';
-  
-  return (
-    <Card className="bg-primary/90 border border-default-200 shadow-sm dark:shadow-xl">
-      <CardBody className="gap-2 p-3 sm:p-6">
-        <div className="flex items-center gap-2 text-foreground">
-          {icon && (<span className="inline-flex">{icon}</span>)}
-          <span className="text-xs sm:text-sm font-bold">{title}</span>
-        </div>
-        <div className={`text-xl sm:text-3xl font-bold ${colorClass}`}>
-          {type === 'expense' ? '-' : type === 'treasury' ? '' : '+'}{(amount ?? 0).toLocaleString('fr-FR')} €
-        </div>
-      </CardBody>
-    </Card>
-  );
-}
+import { CardInfo } from '@/components/CardInfo';
 
 export default function CardTotalBudget(props: ClubID) {
   const clubID = props.id;
@@ -41,26 +16,36 @@ export default function CardTotalBudget(props: ClubID) {
   const totalExpense = clubSummary?.totalExpense ?? 0;
   const totalTresor = clubSummary?.totalTreasury ?? 0;
 
+  const formatCurrency = (value: number | string) => {
+    const numValue = typeof value === 'number' ? value : Number(value);
+    return `${numValue.toLocaleString('fr-FR')} €`;
+  };
+
   return (
     <div className="flex flex-col gap-6">
       <div className="grid grid-cols-3 gap-2 sm:gap-4">
-        <CardBudget
+        <CardInfo
           title="Trésorerie"
-          amount={totalTresor}
-          type="treasury"
+          value={totalTresor}
           icon={<Wallet size={20} />}
+          color="text-success"
+          formatter={formatCurrency}
         />
-        <CardBudget
+        <CardInfo
           title="Recettes"
-          amount={totalIncome}
-          type="income"
+          value={totalIncome}
           icon={<TrendingUp size={20} />}
+          color="text-blue-600"
+          prefix="+"
+          formatter={formatCurrency}
         />
-        <CardBudget
+        <CardInfo
           title="Dépenses"
-          amount={totalExpense}
-          type="expense"
+          value={totalExpense}
           icon={<TrendingDown size={20} />}
+          color="text-danger"
+          prefix="-"
+          formatter={formatCurrency}
         />
       </div>
     </div>

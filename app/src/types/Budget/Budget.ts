@@ -22,7 +22,7 @@ export const budgetExample: Budget[] = [
     label: 'Cotisations membres',
     amount: 1500,
     type: 'income',
-    date: new Date('2024-01-15'),
+    date: new Date('2026-01-15'),
     description: 'Cotisations mensuelles',
   },
   {
@@ -31,7 +31,7 @@ export const budgetExample: Budget[] = [
     label: 'Location salle',
     amount: 500,
     type: 'expense',
-    date: new Date('2024-01-10'),
+    date: new Date('2026-01-10'),
     description: 'Location pour janvier',
   },
   {
@@ -40,7 +40,7 @@ export const budgetExample: Budget[] = [
     label: 'Matériel',
     amount: 200,
     type: 'expense',
-    date: new Date('2024-01-05'),
+    date: new Date('2026-01-05'),
   },
   {
     BudgetID: '4',
@@ -48,7 +48,7 @@ export const budgetExample: Budget[] = [
     label: 'Sponsoring',
     amount: 800,
     type: 'income',
-    date: new Date('2024-01-20'),
+    date: new Date('2026-01-20'),
     description: 'Sponsoring local',
   },
   {
@@ -57,7 +57,7 @@ export const budgetExample: Budget[] = [
     label: 'Uniforme',
     amount: 300,
     type: 'expense',
-    date: new Date('2024-01-08'),
+    date: new Date('2026-01-08'),
   },
   // Club 2 examples
   {
@@ -66,7 +66,7 @@ export const budgetExample: Budget[] = [
     label: 'Cotisations membres',
     amount: 1200,
     type: 'income',
-    date: new Date('2024-01-15'),
+    date: new Date('2026-01-15'),
     description: 'Cotisations mensuelles',
   },
   {
@@ -75,7 +75,7 @@ export const budgetExample: Budget[] = [
     label: 'Location équipement',
     amount: 400,
     type: 'expense',
-    date: new Date('2024-01-12'),
+    date: new Date('2026-01-12'),
   },
   {
     BudgetID: '8',
@@ -83,7 +83,7 @@ export const budgetExample: Budget[] = [
     label: 'Frais administratifs',
     amount: 150,
     type: 'expense',
-    date: new Date('2024-01-10'),
+    date: new Date('2026-01-10'),
   },
   {
     BudgetID: '9',
@@ -91,7 +91,7 @@ export const budgetExample: Budget[] = [
     label: 'Subvention',
     amount: 600,
     type: 'income',
-    date: new Date('2024-01-18'),
+    date: new Date('2026-01-18'),
     description: 'Subvention municipale',
   },
 ];

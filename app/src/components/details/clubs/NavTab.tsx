@@ -45,8 +45,8 @@ export default function ClubNavTab(props: ClubID) {
               </div>
             }
           >
-            <Card className="mt-4 bg-primary/50 border border-default-100 shadow-sm dark:shadow-xl">
-              <CardBody>
+            <Card className="mt-4 bg-transparent shadow-none">
+              <CardBody className="p-0">
                 {item.content}
               </CardBody>
             </Card>

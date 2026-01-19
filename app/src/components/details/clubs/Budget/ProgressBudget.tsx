@@ -26,7 +26,7 @@ export default function ProgressBudget(props: ClubID) {
 		<Card className="w-full bg-primary border border-default-200 shadow-sm dark:shadow-xl mt-3">
 			<CardBody className="gap-3 p-3 sm:gap-4 sm:p-6">
 				{/* Titre et Trésorerie */}
-				<div className="flex items-center gap-2">
+				<div className="flex items-center justify-center sm:justify-start gap-2">
 					<Landmark size={20} className="text-foreground" />
 					<h3 className="text-base sm:text-lg font-semibold text-foreground"> Budget</h3>
 				</div>
