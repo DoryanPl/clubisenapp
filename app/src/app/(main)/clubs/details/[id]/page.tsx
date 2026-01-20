@@ -3,7 +3,7 @@
 import React from 'react';
 import { useParams } from 'next/navigation';
 import PageTitle from '@/components/clubs/details/PageTitle';
-import NavTab from '@/components/clubs/details/NavTab';
+import ClubNavTab from '@/components/clubs/details/ClubNavTab';
 import type { ClubPage, ClubID } from '@/types/Club/Club';
 
 export default function ClubsDetailsPage() {
@@ -22,7 +22,7 @@ export default function ClubsDetailsPage() {
   return (
     <>
       <PageTitle {...clubPageProps} />
-      <NavTab {...clubIDProps} />
+      <ClubNavTab {...clubIDProps} />
     </>
   );
 }

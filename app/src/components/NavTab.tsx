@@ -1,30 +1,27 @@
 'use client';
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Tabs, Tab, Card, CardBody } from '@heroui/react';
-import { Eye, Users, Wallet } from 'lucide-react';
-import TabMembre from './Membre/TabMembre';
-import TabOverview from './overview/TabOverview';
-import TabBudget from './Budget/TabBudget';
-import type { ClubID } from '@/types/Club/Club';
-import TabHeure from './Heure/TabHeure';
+import { LucideIcon } from 'lucide-react';
 
-export default function ClubNavTab(props: ClubID) {
-  const clubIDProps: ClubID = { id: props.id };
+export interface NavItem {
+  id: string;
+  label: string;
+  icon: LucideIcon;
+  content: ReactNode;
+}
 
-  const navItems = [
-    { id: 'overview', label: 'Vue d\'ensemble', icon: Eye, content: ( <TabOverview {...clubIDProps} />) },
-    { id: 'members', label: 'Membres', icon: Users, content: ( <TabMembre {...clubIDProps} />) },  
-    { id: 'budget', label: 'Budget', icon: Wallet, content: ( <TabBudget {...clubIDProps} />)  },
-    { id: 'heure', label: 'Heures', icon: Wallet, content: ( <TabHeure {...clubIDProps} />)  },
-  ];
+export interface NavTabsProps {
+  items: NavItem[];
+  ariaLabel?: string;
+}
 
-
+export default function NavTabs({ items, ariaLabel = "Tabs" }: NavTabsProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <Tabs 
-        aria-label="Club sections" 
-        items={navItems}
+        aria-label={ariaLabel}
+        items={items}
         variant="solid"
         color="secondary"
         className="w-full sm:w-auto"

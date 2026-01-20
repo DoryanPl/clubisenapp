@@ -308,7 +308,7 @@ export default function ListMembre(props: ClubID) {
 				</TableHeader>
 				<TableBody emptyContent="Aucun membre trouvé" items={items}>
 					{(item) => (
-						<TableRow key={item.ClubID}>
+						<TableRow key={item.MembreID}>
 							{(columnKey) => <TableCell>{renderCell(item, String(columnKey))}</TableCell>}
 						</TableRow>
 					)}

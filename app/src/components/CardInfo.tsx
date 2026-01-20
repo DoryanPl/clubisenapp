@@ -27,14 +27,14 @@ export function CardInfo({
   className = '',
   cardClassName = 'bg-primary/90 border border-default-200 shadow-sm dark:shadow-xl',
   titleClassName = 'text-xs sm:text-sm font-bold',
-  valueClassName = 'text-xl sm:text-3xl font-bold',
+  valueClassName = 'text-lg sm:text-xl lg:text-3xl font-bold',
   formatter = (v: number | string) => (typeof v === 'number' ? v.toLocaleString('fr-FR') : String(v))
 }: CardInfoProps) {
   
   return (
     <Card className={cardClassName}>
       <CardBody className={`gap-2 p-3 sm:p-6 ${className}`}>
-        <div className="flex items-center gap-2 text-foreground">
+        <div className="flex items-center gap-1 sm:gap-2 text-foreground text-center justify-center sm:justify-start">
           {icon && (<span className="inline-flex">{icon}</span>)}
           <span className={titleClassName}>{title}</span>
         </div>

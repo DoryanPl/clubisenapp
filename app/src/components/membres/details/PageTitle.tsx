@@ -1,24 +1,23 @@
 import { MapPin } from 'lucide-react';
 import { Image, Card, CardBody, Button } from "@heroui/react";
-import { clubsExample, type ClubPage } from '@/types/Club/Club';
+import { membresExample, type MembrePage } from '@/types/Membre/Membre';
 
 
-export default function ClubPageTitle(props: ClubPage) {
-  const clubID = props.id;
+export default function MembrePageTitle(props: MembrePage) {
+  const membreID = props.id;
   const isAdmin = props.isAdmin || false;
 
-  const club = clubsExample.find(c => c.id === clubID);
-
+  const membre = membresExample.find(m => m.MembreID === membreID);
   const campusInfo = {
     nom: "ISEN Lille",
     adresse: "41 Boulevard Vauban",
     ville: "Lille"
   };
 
-  if (!club) {
+  if (!membre) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-foreground">Club non trouvé</p>
+        <p className="text-xl text-foreground">Membre non trouvé</p>
       </div>
     );
   }

@@ -2,68 +2,14 @@
 
 import React from 'react';
 import { Card, CardBody, Input } from '@heroui/react';
-import { Clock, Search, CircleCheck, CircleX } from 'lucide-react';
-import { heureExample, Heure } from '@/types/Heure/Heure';
+import { Clock, Search } from 'lucide-react';
+import { heureExample } from '@/types/Heure/Heure';
 import type { ClubID } from '@/types/Club/Club';
 import { DateSelector } from '@/components/DateSelector';
 import { FilterButton } from '@/components/FilterButton';
 import { PaginationSection } from '@/components/PaginationSection';
+import HeureItem from '@/components/HeureItem';
 
-interface HeureItemProps {
-  heure: Heure;
-}
-
-const heureStatus = {
-  accepted: {
-    icon: <CircleCheck size={20} className="text-emerald-500 font-bold" />,
-    background: 'bg-emerald-100 dark:bg-emerald-500/10',
-    color: 'text-emerald-500',
-    label: 'Accepté',
-  },
-  waited: {
-    icon: <Clock size={20} className="text-yellow-500 font-bold" />,
-    background: 'bg-yellow-100 dark:bg-yellow-500/10',
-    color: 'text-yellow-500',
-    label: 'En attente',
-  },
-  rejected: {
-    icon: <CircleX size={20} className="text-red-500 font-bold" />,
-    background: 'bg-red-100 dark:bg-red-500/10',
-    color: 'text-red-500',
-    label: 'Refusé',
-  },
-};
-
-function HeureCard({ heure }: HeureItemProps) {
- 
-  return (
-    <div className={`border border-default-200 shadow-sm dark:shadow-xl flex flex-row items-center gap-3 p-3 sm:p-4 rounded-lg sm:rounded-2xl border`}>
-      {/* Status Icon with background */}
-      <div className={`flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg ${heureStatus[heure.type].background}`}>
-        {heureStatus[heure.type].icon}
-      </div>
-      
-      {/* Content */}
-      <div className="flex-1 min-w-0">
-        <p className="font-bold text-foreground text-sm sm:text-base truncate">{heure.membreName}</p>
-        <div className="flex flex-col gap-1 text-xs text-foreground/70 mt-1">
-          <p>{new Date(heure.dateHeure).toLocaleDateString('fr-FR')}</p>
-        </div>
-      </div>
-      
-      {/* Hours and Status */}
-      <div className="flex flex-col items-end">
-        <span className="font-bold text-foreground text-sm sm:text-base">
-          {heure.duree}h
-        </span>
-        <span className={`uppercase font-bold text-xs ${heureStatus[heure.type].color}`}>
-          {heureStatus[heure.type].label}
-        </span>
-      </div>
-      
-    </div>
-  );
-}
 
 const HeurePerPage = [5, 10, 15];
 const defaultRowsPerPage = 5;
@@ -188,7 +134,7 @@ export default function ListHeure(props: ClubID) {
         <div className="flex flex-col gap-2">
           {paginatedItems.length > 0 ? (
             paginatedItems.map((item) => (
-              <HeureCard key={item.HeureID} heure={item} />
+              <HeureItem key={item.HeureID} heure={item} />
             ))
           ) : (
             <p className="text-center text-foreground/50 py-6">Aucune heure trouvée</p>

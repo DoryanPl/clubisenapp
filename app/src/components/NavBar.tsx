@@ -6,14 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, 
   Link, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
 import NextLink from "next/link";
-import { LayoutGrid, GraduationCap, Users, Wallet, UserRound, ClipboardList } from "lucide-react";
+import { LayoutGrid, Users, Wallet, UserRound, ClipboardList, Drama } from "lucide-react";
 import SwitchDarkMode from "./SwitchDarkMode";
 import Image from "next/image";
 import logo from "../../public/logo.svg";
 
 const navItems = [
   { path: "/", label: "Accueil", icon: LayoutGrid },
-  { path: "/clubs", label: "Clubs", icon: GraduationCap },
+  { path: "/clubs", label: "Clubs", icon: Drama },
   { path: "/membres", label: "Membres", icon: Users },
   { path: "/budget", label: "Budget", icon: Wallet },
   { path: "/monclub", label: "Mon Club", icon: ClipboardList },

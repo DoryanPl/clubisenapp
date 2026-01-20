@@ -46,7 +46,7 @@ export default function CardOverview(props: ClubID) {
 
     />
     <CardInfo
-        title="Solde actuel"
+        title="Solde"
         value={totalSolde}
         icon={<Wallet size={20} />}
         color="text-blue-600"

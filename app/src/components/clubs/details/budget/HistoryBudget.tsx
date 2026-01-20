@@ -8,30 +8,8 @@ import type { ClubID } from '@/types/Club/Club';
 import { DateSelector } from '@/components/DateSelector';
 import { FilterButton } from '@/components/FilterButton';
 import { PaginationSection } from '@/components/PaginationSection';
+import TransactionItem from '@/components/TransactionItem';
 
-
-interface TransactionItemProps {
-  transaction: Budget;
-}
-
-function TransactionItem({ transaction }: TransactionItemProps) {
-  const isIncome = transaction.type === 'income';
-  const colorClass = isIncome ? 'text-emerald-500' : 'text-red-500';
-  const bgClass = isIncome ? 'bg-emerald-200 dark:bg-emerald-500/10' : 'bg-red-200 dark:bg-red-500/10';
-  const borderClass = isIncome ? 'border-emerald-500/40 dark:border-emerald-500/20' : 'border-red-500/40 dark:border-red-500/20';
-  
-  return (
-    <div className={`flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 ${bgClass} rounded-lg sm:rounded-2xl border ${borderClass}`}>
-      <div className="flex-1">
-        <p className="font-bold text-foreground text-sm sm:text-base">{transaction.label}</p>
-        <p className="text-xs text-foreground/50">{new Date(transaction.date).toLocaleDateString('fr-FR')}</p>
-      </div>
-      <span className={`font-black ${colorClass} text-sm sm:text-base mt-2 sm:mt-0`}>
-        {isIncome ? '+' : '-'} {Math.abs(transaction.amount).toLocaleString('fr-FR')} €
-      </span>
-    </div>
-  );
-}
 
 const TransactionPerPage = [5, 10, 15];
 const defaultRowsPerPage = 5;
@@ -109,7 +87,7 @@ export default function HistoryBudget(props: ClubID) {
         </div>
 
         {/* Search and Filter Bar */}
-        <div className="flex flex-col gap-2 sm:gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex gap-2 sm:gap-3 flex-col sm:flex-row sm:items-center sm:justify-between">
           <Input
             isClearable
             radius="lg"
@@ -149,7 +127,7 @@ export default function HistoryBudget(props: ClubID) {
         <div className="flex flex-col gap-2">
           {paginatedItems.length > 0 ? (
             paginatedItems.map((item) => (
-              <TransactionItem key={item.id} transaction={item} />
+              <TransactionItem key={item.BudgetID} transaction={item} />
             ))
           ) : (
             <p className="text-center text-foreground/50 py-6">Aucune transaction trouvée</p>

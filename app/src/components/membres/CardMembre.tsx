@@ -21,11 +21,11 @@ function CardMembre({ searchTerm = '' }: CardMembreProps) {
       {filteredMembres.map((membre, index) => (
         <Link 
           key={index} 
-          href={getRedirection(membre.id)}
+          href={getRedirection(membre.MembreID.toString())}
           className="no-underline h-full flex">
           <Card
             isPressable
-            key={membre.id}
+            key={membre.MembreID}
             shadow="sm"
             className="bg-primary relative border border-default-100 hover:border-secondary transition-all hover:shadow-lg hover:shadow-secondary/50  flex flex-col w-full"
             onPress={() => console.log("item pressed")}>
@@ -53,11 +53,11 @@ function CardMembre({ searchTerm = '' }: CardMembreProps) {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row w-full items-center justify-center gap-2">
-                <span className="px-3 py-1 rounded-full bg-content2 text-foreground text-sm font-medium">
+              <div className="flex flex-row w-full items-center justify-center gap-2">
+                <span className="px-3 py-2 rounded-full bg-content2 text-foreground text-sm font-medium text-center whitespace-nowrap">
                   {membre.clubNom}
                 </span>
-                <span className="px-3 py-1 rounded-full bg-secondary/80 text-background text-sm font-semibold">
+                <span className="px-3 py-2 rounded-full bg-secondary/80 text-white text-sm font-semibold text-center whitespace-nowrap">
                   {membre.role}
                 </span>
               </div>
