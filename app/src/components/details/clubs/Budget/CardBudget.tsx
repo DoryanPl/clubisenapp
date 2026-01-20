@@ -1,71 +1,53 @@
 'use client';
 
 import React from 'react';
-import { Card, CardBody } from '@heroui/react';
 import { TrendingUp, TrendingDown, Wallet } from 'lucide-react';
-import { budgetExample } from '@/types/Budget/Budget';
+import {budgetSummaryExample } from '@/types/Budget/Budget';
 import type { ClubID } from '@/types/Club/Club';
+import { CardInfo } from '@/components/CardInfo';
 
-interface CardBudgetProps {
-  title: string;
-  amount: number;
-  type: 'income' | 'expense' | 'treasury';
-  icon?: React.ReactNode;
-}
+export default function CardBudget(props: ClubID) {
+  const clubID = props.id;
 
-export function CardBudget({ title, amount, type, icon }: CardBudgetProps) {
-  const colorClass = type === 'income' ? 'text-blue-600' : type === 'expense' ? 'text-danger' : 'text-success';
-  
-  return (
-    <Card className="bg-primary/90 border border-default-100 shadow-sm dark:shadow-xl">
-      <CardBody className="gap-2 p-3 sm:p-6">
-        <div className="flex items-center gap-2 text-foreground">
-          {icon && (<span className="inline-flex">{icon}</span>)}
-          <span className="text-xs sm:text-sm font-bold">{title}</span>
-        </div>
-        <div className={`text-xl sm:text-3xl font-bold ${colorClass}`}>
-          {type === 'expense' ? '-' : type === 'treasury' ? '' : '+'}{(amount ?? 0).toLocaleString('fr-FR')} €
-        </div>
-      </CardBody>
-    </Card>
-  );
-}
+  const clubSummary = budgetSummaryExample.find(summary => summary.ClubID === clubID);
 
-export default function CardTotalBudget(props: ClubID) {
-  const clubIDProps: ClubID = { id: props.id };
+  const totalIncome = clubSummary?.totalIncome ?? 0;
+  const totalExpense = clubSummary?.totalExpense ?? 0;
+  const totalTresor = clubSummary?.totalTreasury ?? 0;
 
-  const totalIncome = budgetExample
-    .filter(b => b.type === 'income')
-    .reduce((sum, b) => sum + b.amount, 0);
-
-  const totalExpense = budgetExample
-    .filter(b => b.type === 'expense')
-    .reduce((sum, b) => sum + Math.abs(b.amount), 0);
-
-  const totalTresor = totalIncome - totalExpense;
+  const formatCurrency = (value: number | string) => {
+    const numValue = typeof value === 'number' ? value : Number(value);
+    return `${numValue.toLocaleString('fr-FR')} €`;
+  };
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="grid grid-cols-3 gap-2 sm:gap-4">
-        <CardBudget
-          title="Trésorerie"
-          amount={totalTresor}
-          type="treasury"
-          icon={<Wallet size={20} />}
-        />
-        <CardBudget
-          title="Recettes"
-          amount={totalIncome}
-          type="income"
-          icon={<TrendingUp size={20} />}
-        />
-        <CardBudget
-          title="Dépenses"
-          amount={totalExpense}
-          type="expense"
-          icon={<TrendingDown size={20} />}
-        />
-      </div>
+    <div className="grid grid-cols-3 gap-2 sm:gap-4">
+      <CardInfo
+        title="Trésorerie"
+        value={totalTresor}
+        icon={<Wallet size={20} />}
+        color="text-success"
+        formatter={formatCurrency}
+        cardClassName="bg-success/10 border border-success/50 shadow-sm dark:shadow-xl"
+      />
+      <CardInfo
+        title="Recettes"
+        value={totalIncome}
+        icon={<TrendingUp size={20} />}
+        color="text-blue-600"
+        prefix="+"
+        formatter={formatCurrency}
+        cardClassName="bg-blue-600/10 border border-blue-600/50 shadow-sm dark:shadow-xl"
+      />
+      <CardInfo
+        title="Dépenses"
+        value={totalExpense}
+        icon={<TrendingDown size={20} />}
+        color="text-danger"
+        prefix="-"
+        formatter={formatCurrency}
+        cardClassName="bg-danger/10 border border-danger/50 shadow-sm dark:shadow-xl"
+      />
     </div>
   );
 }

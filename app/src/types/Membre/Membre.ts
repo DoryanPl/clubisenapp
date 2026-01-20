@@ -1,5 +1,5 @@
 export interface Membre {
-  id: string;
+  ClubID: number;
   nom: string;
   prenom: string;
   email: string;
@@ -15,7 +15,7 @@ export type Membres = Membre[];
 
 export const membresExample: Membres = [
   {
-    id: "m1",
+    ClubID: 1,
     nom: "Dupont",
     prenom: "Alice",
     email: "alice.dupont@example.com",
@@ -27,7 +27,7 @@ export const membresExample: Membres = [
     isActive: true,
   },
   {
-    id: "m2",
+    ClubID: 1,
     nom: "Martin",
     prenom: "Lucas",
     email: "lucas.martin@example.com",
@@ -39,7 +39,7 @@ export const membresExample: Membres = [
     isActive: false,
   },
   {
-    id: "m3",
+    ClubID: 2,
     nom: "Nguyen",
     prenom: "Sophie",
     email: "sophie.nguyen@example.com",
@@ -51,7 +51,7 @@ export const membresExample: Membres = [
     isActive: true,
   },
   {
-    id: "m4",
+    ClubID: 2,
     nom: "Diallo",
     prenom: "Cheikh",
     email: "cheikh.diallo@example.com",

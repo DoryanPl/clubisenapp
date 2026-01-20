@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, 
   Link, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
 import NextLink from "next/link";
-import { LayoutGrid, GraduationCap, Users, Wallet, UserRound, Menu, X } from "lucide-react";
+import { LayoutGrid, GraduationCap, Users, Wallet, UserRound, ClipboardList } from "lucide-react";
 import SwitchDarkMode from "./SwitchDarkMode";
 import Image from "next/image";
 import logo from "../../public/logo.svg";
@@ -16,6 +16,7 @@ const navItems = [
   { path: "/clubs", label: "Clubs", icon: GraduationCap },
   { path: "/membres", label: "Membres", icon: Users },
   { path: "/budget", label: "Budget", icon: Wallet },
+  { path: "/monclub", label: "Mon Club", icon: ClipboardList },
 ];
 
 const profilMenuItems = [
@@ -138,14 +139,15 @@ export function NavBar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setIsMenuOpen(false)}
-              className="fixed left-0 top-20 right-0 bottom-0 bg-black/30 sm:hidden"
+              className="fixed left-0 top-20 right-0 bottom-0 bg-black/30 sm:hidden z-40"
             />
             <motion.div
               initial={{ x: -300 }}
               animate={{ x: 0 }}
               exit={{ x: -300 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="fixed left-0 h-screen w-64 bg-primary shadow-sm dark:shadow-xl sm:hidden overflow-y-auto"
+              className="fixed left-0 h-screen w-64 bg-primary shadow-sm dark:shadow-xl sm:hidden overflow-y-auto z-50"
+              
             >
  
               <div className="p-4">
