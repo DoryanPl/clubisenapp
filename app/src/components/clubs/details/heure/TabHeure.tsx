@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { ClubID } from '@/types/Club/Club';
-import ListHeure from '@/components/details/clubs/Heure/ListHeure';
+import ListHeure from '@/components/clubs/details/heure/ListHeure';
 
 
 export default function TabHeure(props: ClubID) {

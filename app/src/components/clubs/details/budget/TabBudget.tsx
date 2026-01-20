@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import CardBudget from '@/components/details/clubs/Budget/CardBudget';
-import HistoryBudget from '@/components/details/clubs/Budget/HistoryBudget';
-import ProgressBudget from '@/components/details/clubs/Budget/ProgressBudget';
+import CardBudget from '@/components/clubs/details/budget/CardBudget';
+import HistoryBudget from '@/components/clubs/details/budget/HistoryBudget';
+import ProgressBudget from '@/components/clubs/details/budget/ProgressBudget';
 import type { ClubID } from '@/types/Club/Club';
 
 

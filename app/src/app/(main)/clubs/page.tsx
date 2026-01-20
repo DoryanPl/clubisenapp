@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import PageTitle from '@/components/PageTitle';
-import CardClub from '@/components/main/CardClub';
+import CardClub from '@/components/clubs/CardClub';
 
 export default function ClubsPage() {
   const [searchTerm, setSearchTerm] = useState('');

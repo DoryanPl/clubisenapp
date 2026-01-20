@@ -4,7 +4,7 @@ import React from 'react';
 import { Tabs, Tab, Card, CardBody } from '@heroui/react';
 import { Eye, Users, Wallet } from 'lucide-react';
 import TabMembre from './Membre/TabMembre';
-import TabOverview from './Overview/TabOverview';
+import TabOverview from './overview/TabOverview';
 import TabBudget from './Budget/TabBudget';
 import type { ClubID } from '@/types/Club/Club';
 import TabHeure from './Heure/TabHeure';

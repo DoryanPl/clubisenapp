@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { useParams } from 'next/navigation';
-import PageTitle from '@/components/details/clubs/PageTitle';
-import NavTab from '@/components/details/clubs/NavTab';
+import PageTitle from '@/components/clubs/details/PageTitle';
+import NavTab from '@/components/clubs/details/NavTab';
 import type { ClubPage, ClubID } from '@/types/Club/Club';
 
 export default function ClubsDetailsPage() {

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PageTitle from '@/components/PageTitle';
-import CardMembre from '@/components/main/CardMembre';
+import CardMembre from '@/components/membres/CardMembre';
 
 export default function MembresPage() {
   const [searchTerm, setSearchTerm] = React.useState('');
