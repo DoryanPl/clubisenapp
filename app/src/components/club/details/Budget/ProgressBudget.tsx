@@ -23,7 +23,7 @@ export default function ProgressBudget(props: ClubID) {
 	const percentageRemaining = 100 - percentageUsed;
 
 	return (
-		<Card className="w-full bg-primary/90 border border-default-200 shadow-sm dark:shadow-xl mt-3">
+		<Card className="w-full bg-primary/90 border border-default-200 shadow-sm dark:shadow-xl">
 			<CardBody className="gap-3 p-3 sm:gap-4 sm:p-6">
 				{/* Titre et Trésorerie */}
 				<div className="flex items-center justify-center sm:justify-start gap-2">

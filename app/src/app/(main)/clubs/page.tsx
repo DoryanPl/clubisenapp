@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import PageTitle from '@/components/main/PageTitle';
+import PageTitle from '@/components/PageTitle';
 import CardClub from '@/components/main/CardClub';
 
 export default function ClubsPage() {

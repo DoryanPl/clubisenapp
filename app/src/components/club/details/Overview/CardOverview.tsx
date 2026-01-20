@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { User, TrendingDown, Wallet } from 'lucide-react';
+import { User, Crown, Wallet } from 'lucide-react';
 import {budgetSummaryExample } from '@/types/Budget/Budget';
 import { membresExample } from '@/types/Membre/Membre';
 import type { ClubID } from '@/types/Club/Club';
@@ -24,14 +24,26 @@ export default function CardOverview(props: ClubID) {
         return `${numValue.toLocaleString('fr-FR')} €`;
     };
 
+    const nomPresident = clubMembers.find(member => member.role.toLowerCase() === 'présidente')?.nom || 'N/A';
+    const prenomPresident = clubMembers.find(member => member.role.toLowerCase() === 'présidente')?.prenom || 'N/A';
+
+
   return (
-    <div className="grid grid-cols-2 gap-2 sm:gap-4 w-fit">
+    <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full">
     <CardInfo
         title="Membres"
         value={totalMembers}
         icon={<User size={20} />}
         color="text-success"
         cardClassName="bg-success/10 border border-success/50 shadow-sm dark:shadow-xl"
+    />
+    <CardInfo
+        title="Président"
+        value={`${prenomPresident} ${nomPresident}`}
+        icon={<Crown size={20} />}
+        color="text-yellow-300"
+        cardClassName="bg-yellow-300/10 border border-yellow-300/50 shadow-sm dark:shadow-xl"
+
     />
     <CardInfo
         title="Solde actuel"
@@ -42,14 +54,6 @@ export default function CardOverview(props: ClubID) {
         formatter={formatCurrency}
         cardClassName="bg-blue-600/10 border border-blue-600/50 shadow-sm dark:shadow-xl"
     />
-    {/* <CardInfo
-        title="Dépenses"
-        value={totalExpense}
-        icon={<TrendingDown size={20} />}
-        color="text-danger"
-        prefix="-"
-        formatter={formatCurrency}
-    /> */}
     </div>
   );
 }

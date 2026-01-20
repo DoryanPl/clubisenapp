@@ -101,7 +101,7 @@ export default function HistoryBudget(props: ClubID) {
   const pages = Math.ceil(filteredBudget.length / rowsPerPage);
 
   return (
-    <Card className="bg-primary/90 border border-default-200 shadow-sm dark:shadow-xl my-3">
+    <Card className="bg-primary/90 border border-default-200 shadow-sm dark:shadow-xl">
       <CardBody className="gap-4 p-3 sm:p-6">
         <div className="flex items-center gap-2 text-foreground justify-center sm:justify-start">
           <span className="inline-flex"><History size={16} className="sm:w-5 sm:h-5" /></span>

@@ -9,9 +9,9 @@ export default function TabOverview(props: ClubID) {
   const clubIDProps: ClubID = { id:  props.id };
 
   return (
-    <>
-      <AboutOverview {...clubIDProps} />
+    <div className="space-y-4">
       <CardOverview {...clubIDProps} />
-    </>
+      <AboutOverview {...clubIDProps} />
+    </div>
   );
 }
