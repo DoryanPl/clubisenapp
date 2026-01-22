@@ -26,27 +26,27 @@ export default function CardBudget(props: ClubID) {
         title="Trésorerie"
         value={totalTresor}
         icon={<Wallet size={20} />}
-        color="text-success"
+        color="text-emerald-500"
         formatter={formatCurrency}
-        cardClassName="bg-success/10 border border-success/50 shadow-sm dark:shadow-xl"
+        cardClassName="bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-500/20 dark:to-emerald-600/10 border-2 border-emerald-400 dark:border-emerald-500/40 shadow-lg"
       />
       <CardInfo
         title="Recettes"
         value={totalIncome}
         icon={<TrendingUp size={20} />}
-        color="text-blue-600"
+        color="text-blue-500"
         prefix="+"
         formatter={formatCurrency}
-        cardClassName="bg-blue-600/10 border border-blue-600/50 shadow-sm dark:shadow-xl"
+        cardClassName="bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-500/20 dark:to-blue-600/10 border-2 border-blue-400 dark:border-blue-500/40 shadow-lg"
       />
       <CardInfo
         title="Dépenses"
         value={totalExpense}
         icon={<TrendingDown size={20} />}
-        color="text-danger"
+        color="text-red-500"
         prefix="-"
         formatter={formatCurrency}
-        cardClassName="bg-danger/10 border border-danger/50 shadow-sm dark:shadow-xl"
+        cardClassName="bg-gradient-to-br from-red-100 to-red-50 dark:from-red-500/20 dark:to-red-600/10 border-2 border-red-400 dark:border-red-500/40 shadow-lg"
       />
     </div>
   );

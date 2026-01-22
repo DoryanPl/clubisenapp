@@ -3,11 +3,9 @@
 import React from 'react';
 import { useParams } from 'next/navigation';
 import PageTitle from '@/components/membres/details/PageTitle';
-import MembreNavTab from '@/components/membres/details/MembreNavTab';
-import { membresExample } from '@/types/Membre/Membre';
 import CardInfoMembre from '@/components/membres/details/CardInfoMembre';
-import CardMembre from '@/components/membres/CardMembre';
 import type { MembrePage, MembreID, MembreSearchParams } from '@/types/Membre/Membre';
+import HeureMembre from '@/components/membres/details/HeureMembre';
 
 
 export default function ClubsDetailsPage() {
@@ -29,13 +27,16 @@ export default function ClubsDetailsPage() {
   };
 
   return (
-    <div className='py-8'>
+    <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
       {/* <PageTitle {...memberPageProps} /> */}
-      {/* <MembreNavTab {...membreIDProps} /> */}
-      <CardInfoMembre {...membreIDProps} />
-      {/* <CardMembre {...membreSearchParams} /> */}
-
-
+      <div className='flex flex-col md:flex-row gap-8 px-4 sm:px-6 lg:px-8'>
+        <div className='w-full lg:w-1/3'>
+          <CardInfoMembre {...membreIDProps} />
+        </div>
+        <div className='w-full lg:w-2/3'>
+          <HeureMembre {...membreIDProps} />
+        </div>
+      </div>
     </div>
   );
 }

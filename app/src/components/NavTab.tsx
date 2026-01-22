@@ -18,38 +18,36 @@ export interface NavTabsProps {
 
 export default function NavTabs({ items, ariaLabel = "Tabs" }: NavTabsProps) {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <Tabs 
-        aria-label={ariaLabel}
-        items={items}
-        variant="solid"
-        color="secondary"
-        className="w-full sm:w-auto"
-        classNames={{
-          tabList: "bg-primary rounded-3xl p-2 border border-foreground/10 shadow-sm dark:shadow-xl w-full sm:w-auto overflow-x-auto",
-          tab: "px-6 py-3 rounded-xl whitespace-nowrap !opacity-100 transition-colors",
-          cursor: "bg-secondary/80 rounded-xl shadow-md",
-          tabContent: "text-foreground/70 group-data-[selected=true]:text-white group-hover:text-foreground font-bold transition-colors"
-        }}
-      >
-        {(item) => (
-          <Tab 
-            key={item.id} 
-            title={
-              <div className="flex items-center gap-2">
-                <item.icon size={18} />
-                <span>{item.label}</span>
-              </div>
-            }
-          >
-            <Card className="mt-4 bg-transparent shadow-none">
-              <CardBody className="p-0">
-                {item.content}
-              </CardBody>
-            </Card>
-          </Tab>
-        )}
-      </Tabs>
-    </div>
+    <Tabs 
+      aria-label={ariaLabel}
+      items={items}
+      variant="solid"
+      color="secondary"
+      className="w-full sm:w-auto"
+      classNames={{
+        tabList: "bg-primary rounded-3xl p-2 border border-foreground/10 shadow-sm dark:shadow-xl w-full sm:w-auto overflow-x-auto",
+        tab: "px-6 py-3 rounded-xl whitespace-nowrap !opacity-100 transition-colors",
+        cursor: "bg-secondary/80 rounded-xl shadow-md",
+        tabContent: "text-foreground/70 group-data-[selected=true]:text-white group-hover:text-foreground font-bold transition-colors"
+      }}
+    >
+      {(item) => (
+        <Tab 
+          key={item.id} 
+          title={
+            <div className="flex items-center gap-2">
+              <item.icon size={18} />
+              <span>{item.label}</span>
+            </div>
+          }
+        >
+          <Card className="mt-4 bg-transparent shadow-none">
+            <CardBody className="p-0">
+              {item.content}
+            </CardBody>
+          </Card>
+        </Tab>
+      )}
+    </Tabs>
   );
 }

@@ -52,8 +52,8 @@ export function DateSelector({
         <PopoverTrigger>
           <Button className={buttonClassName}>
             {icon}
-            <span className="hidden sm:inline text-sm sm:text-base">{displayedDate}</span>
-            <span className="sm:hidden text-sm">{formatDate(value) || mobileLabel}</span>
+            <span className="hidden sm:inline">{displayedDate}</span>
+            <span className="sm:hidden">{formatDate(value) || mobileLabel}</span>
           </Button>
         </PopoverTrigger>
         <PopoverContent className={popoverClassName}>

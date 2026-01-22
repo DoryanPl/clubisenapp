@@ -2,13 +2,14 @@
 
 import React from 'react';
 import { Card, CardBody, Input } from '@heroui/react';
-import { Clock, Search } from 'lucide-react';
+import { History, Search } from 'lucide-react';
 import { heureExample } from '@/types/Heure/Heure';
 import type { ClubID } from '@/types/Club/Club';
 import { DateSelector } from '@/components/DateSelector';
 import { FilterButton } from '@/components/FilterButton';
 import { PaginationSection } from '@/components/PaginationSection';
 import HeureItem from '@/components/HeureItem';
+import SectionTitle from '@/components/SectionTitle';
 
 
 const HeurePerPage = [5, 10, 15];
@@ -88,10 +89,8 @@ export default function ListHeure(props: ClubID) {
   return (
     <Card className="bg-primary/90 border border-default-200 shadow-sm dark:shadow-xl">
       <CardBody className="gap-4 p-3 sm:p-6">
-        <div className="flex items-center gap-2 text-foreground justify-center sm:justify-start">
-          <span className="inline-flex"><Clock size={16} className="sm:w-5 sm:h-5" /></span>
-          <span className="text-base sm:text-lg font-bold text-foreground">Activités des heures</span>
-        </div>
+      
+        <SectionTitle icon={<History size={16} className="sm:w-5 sm:h-5" />} title="Historique d'heures d'activités" />
 
         {/* Search and Filter Bar */}
         <div className="flex flex-col gap-2 sm:gap-3 sm:flex-row sm:items-center sm:justify-between">
