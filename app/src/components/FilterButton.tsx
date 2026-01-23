@@ -74,7 +74,7 @@ export function FilterButton({
                       <DropdownItem 
                         key="search" 
                         textValue="search" 
-                        className="mb-2"
+                        className="mb-2 without-bg"
                         classNames={{
                         }}
                         isReadOnly

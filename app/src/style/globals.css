@@ -16,6 +16,10 @@ header {
   padding: 0;
 }
 
+.without-bg.data-\[selectable\=true\]\:focus\:bg-default[data-selectable="true"]:focus {
+  background-color: transparent !important;
+}
+
 /* Animation de la barre navbar au hover */
 [role="menuitem"][data-active="true"]::after,
 [role="menuitem"][aria-current="page"]::after {
