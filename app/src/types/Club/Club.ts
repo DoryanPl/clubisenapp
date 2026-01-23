@@ -1,4 +1,4 @@
-export interface Club {
+export default interface Club {
   id: number;
   ClubNom: string;
   ClubDesc: string;
