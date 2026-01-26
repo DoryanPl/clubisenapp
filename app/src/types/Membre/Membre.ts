@@ -8,6 +8,12 @@ export interface MembrePage {
   isAdmin?: boolean;
 }
 
+export interface MembreSearchParams {
+  id?: number;
+  search?: string;
+  isAdmin?: boolean;
+}
+
 export interface Membre {
   ClubID: number;
   MembreID: number;
