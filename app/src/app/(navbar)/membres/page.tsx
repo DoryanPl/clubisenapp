@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import PageTitle from '@/components/PageTitle';
+import PageTitle from '@/components/commons/PageTitle';
 import CardMembre from '@/components/membres/CardMembre';
 
 export default function MembresPage() {
