@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "@heroui/react";
-import { Home, ArrowLeft } from "lucide-react";
+import { Home } from "lucide-react";
+import Link from "next/link";
 
 export default function NotFound() {
-  const router = useRouter();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-content1 px-4">
@@ -35,23 +34,15 @@ export default function NotFound() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            onClick={() => router.back()}
-            className="bg-foreground/10 text-foreground hover:bg-foreground/20"
-            size="lg"
-            startContent={<ArrowLeft size={20} />}
-          >
-            Retour
-          </Button>
-          
-          <Button
-            onClick={() => router.push("/")}
-            className="bg-secondary hover:bg-secondary/90 text-background font-semibold"
-            size="lg"
-            startContent={<Home size={20} />}
-          >
-            Accueil
-          </Button>
+          <Link href="/">
+            <Button
+              className="bg-secondary hover:bg-secondary/90 text-background font-semibold"
+              size="lg"
+              startContent={<Home size={20} />}
+            >
+              Accueil
+            </Button>
+          </Link>
         </div>
       </motion.div>
     </div>
