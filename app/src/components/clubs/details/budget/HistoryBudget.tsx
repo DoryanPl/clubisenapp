@@ -9,6 +9,7 @@ import { DateSelector } from '@/components/DateSelector';
 import { FilterButton } from '@/components/FilterButton';
 import { PaginationSection } from '@/components/PaginationSection';
 import TransactionItem from '@/components/TransactionItem';
+import SectionTitle from '@/components/SectionTitle';
 
 
 const TransactionPerPage = [5, 10, 15];
@@ -79,12 +80,10 @@ export default function HistoryBudget(props: ClubID) {
   const pages = Math.ceil(filteredBudget.length / rowsPerPage);
 
   return (
-    <Card className="bg-primary/90 border border-default-200 shadow-sm dark:shadow-xl">
+    <Card className="bg-primary/60 border border-default-200 shadow-sm dark:shadow-xl">
       <CardBody className="gap-4 p-3 sm:p-6">
-        <div className="flex items-center gap-2 text-foreground justify-center sm:justify-start">
-          <span className="inline-flex"><History size={16} className="sm:w-5 sm:h-5" /></span>
-          <span className="text-base sm:text-lg font-bold text-foreground">Historique des transactions</span>
-        </div>
+     
+			  <SectionTitle icon={<History size={16} className="sm:w-5 sm:h-5" />} title="Historique des transactions" />
 
         {/* Search and Filter Bar */}
         <div className="flex gap-2 sm:gap-3 flex-col sm:flex-row sm:items-center sm:justify-between">

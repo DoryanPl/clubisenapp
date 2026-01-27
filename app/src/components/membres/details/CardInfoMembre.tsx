@@ -1,9 +1,8 @@
 import React from "react";
-import { Card, CardBody, CardFooter, Avatar } from "@heroui/react";
+import { Card, CardBody, Avatar } from "@heroui/react";
 import { Mail, Clock, Check, GraduationCap, MessageSquare, Drama } from "lucide-react";
 import { membresExample } from "@/types/Membre/Membre";
 import type { MembreID } from "@/types/Membre/Membre";
-import { div } from "framer-motion/client";
 
 export default function CardInfoMembre(props: MembreID) {
   const membreID = props.id;
@@ -66,11 +65,19 @@ export default function CardInfoMembre(props: MembreID) {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Card className="bg-primary border border-default-200 shadow-sm dark:shadow-xl w-full max-w-md mx-auto">
-            <CardBody className="p-6 flex flex-col items-center gap-6">
-                {/* Avatar avec statut */}
-                <div className="relative">
+      <Card className="bg-primary/60 border border-default-200 shadow-xl w-full relative">
+          <CardBody className="p-6 flex flex-col items-center gap-6">
+              {/* Indicateur de statut */}
+              <span
+                  className={`absolute top-3 right-3 h-3 w-3 rounded-full animate-pulse shadow-[0_0_0_6px_rgba(0,0,0,0.04)] ${
+                  membre.isActive ? "bg-emerald-500 shadow-[0_0_0_6px_rgba(16,185,129,0.25)]" : "bg-rose-500 shadow-[0_0_0_6px_rgba(244,63,94,0.25)]"
+                  }`}
+                  aria-label={membre.isActive ? "Compte actif" : "Compte inactif"}
+                  role="status"
+              />
+
+              {/* Avatar */}
+              <div className="relative">
                 <Avatar
                     src={membre.avatar}
                     name={`${membre.prenom} ${membre.nom}`}
@@ -79,33 +86,21 @@ export default function CardInfoMembre(props: MembreID) {
                     isBordered
                     color="secondary"
                 />
-                <span
-                    className={`absolute bottom-4 right-4 h-6 w-6 rounded-full flex items-center justify-center border-2 border-primary ${
-                    membre.isActive
-                        ? "bg-emerald-500"
-                        : "bg-rose-500"
-                    }`}
-                    aria-label={membre.isActive ? "Actif" : "Inactif"}
-                >
-                    {membre.isActive && (
-                    <Check className="w-4 h-4 text-white" />
-                    )}
-                </span>
-                </div>
+              </div>
 
-                {/* Nom */}
-                <div className="text-center">
-                <h2 className="text-3xl font-bold text-foreground">
+              {/* Nom */}
+              <div className="text-center">
+                <h3 className="text-3xl font-bold text-foreground">
                     {membre.prenom} {membre.nom}
-                </h2>
-                <p className="text-lg text-secondary flex items-center justify-center gap-2 mt-2">
+                </h3>
+                <p className="text-lg text-secondary font-medium flex items-center justify-center gap-2 mt-2">
                     <Drama className="w-5 h-5"  />
                     {membre.clubNom}
                 </p>
-                </div>
+              </div>
 
-                {/* Info Box */}
-                <div className="w-full bg-background/30 border border-default-200 focus-within:border-primary rounded-lg p-4 space-y-3">
+              {/* Info Box */}
+              <div className="w-full bg-background/70 border border-default-200 focus-within:border-primary rounded-lg p-4 space-y-3">
                 <div className="flex items-center gap-3 text-foreground/80">
                     <Mail size={18} className="flex-shrink-0" />
                     <span className="text-sm">{membre.email}</span>
@@ -118,27 +113,26 @@ export default function CardInfoMembre(props: MembreID) {
                     <Clock size={18} className="flex-shrink-0" />
                     <span className="text-sm">Vu : {formatLastConnection(membre.lastConnection)}</span>
                 </div>
-                </div>
+              </div>
 
-                {/* Stats */}
-                <div className="w-full flex justify-around pt-4">
+              {/* Stats */}
+              <div className="w-full flex justify-around">
                 <div className="text-center">
-                    <div className="text-3xl font-bold text-secondary">
+                    <div className="text-2xl font-bold text-secondary">
                     {membre.heuresValidees || 0}h
                     </div>
                     <div className="text-xs text-foreground/50 uppercase tracking-wide">
                     Heures validées
                     </div>
                 </div>
-                </div>
+              </div>
 
-                {/* Contact Button */}
-                <button className="w-full mt-4 bg-secondary/80 hover:bg-secondary-dark/70 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors">
+              {/* Contact Button */}
+              <button className="w-full bg-secondary/80 hover:bg-secondary-dark/70 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors">
                 <MessageSquare size={20} />
                 Contacter l'étudiant
-                </button>
-            </CardBody>
-        </Card>
-    </div>
+              </button>
+          </CardBody>
+      </Card>
   );
 }

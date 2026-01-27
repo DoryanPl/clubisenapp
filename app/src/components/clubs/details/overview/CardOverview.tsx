@@ -34,25 +34,24 @@ export default function CardOverview(props: ClubID) {
         title="Membres"
         value={totalMembers}
         icon={<User size={20} />}
-        color="text-success"
-        cardClassName="bg-success/10 border border-success/50 shadow-sm dark:shadow-xl"
+        color="text-emerald-500"
+        cardClassName="bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-500/20 dark:to-emerald-600/10 border-2 border-emerald-400 dark:border-emerald-500/40 shadow-lg"
     />
     <CardInfo
         title="Président"
         value={`${prenomPresident} ${nomPresident}`}
         icon={<Crown size={20} />}
-        color="text-yellow-300"
-        cardClassName="bg-yellow-300/10 border border-yellow-300/50 shadow-sm dark:shadow-xl"
-
+        color="text-yellow-500"
+        cardClassName="bg-gradient-to-br from-yellow-100 to-yellow-50 dark:from-yellow-500/20 dark:to-yellow-600/10 border-2 border-yellow-400 dark:border-yellow-500/40 shadow-lg"
     />
     <CardInfo
         title="Solde"
         value={totalSolde}
         icon={<Wallet size={20} />}
-        color="text-blue-600"
+        color="text-blue-500"
         prefix="+"
         formatter={formatCurrency}
-        cardClassName="bg-blue-600/10 border border-blue-600/50 shadow-sm dark:shadow-xl"
+        cardClassName="bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-500/20 dark:to-blue-600/10 border-2 border-blue-400 dark:border-blue-500/40 shadow-lg"
     />
     </div>
   );

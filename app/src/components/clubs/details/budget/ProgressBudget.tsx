@@ -5,6 +5,7 @@ import { Progress, Card, CardBody } from "@heroui/react";
 import { budgetSummaryExample } from "@/types/Budget/Budget";
 import { Landmark } from "lucide-react";
 import type { ClubID } from '@/types/Club/Club';
+import SectionTitle from "@/components/SectionTitle";
 
 export default function ProgressBudget(props: ClubID) {
 	const clubID = props.id;
@@ -23,13 +24,10 @@ export default function ProgressBudget(props: ClubID) {
 	const percentageRemaining = 100 - percentageUsed;
 
 	return (
-		<Card className="w-full bg-primary/90 border border-default-200 shadow-sm dark:shadow-xl">
+		<Card className="w-full bg-primary/60 border border-default-200 shadow-sm dark:shadow-xl">
 			<CardBody className="gap-3 p-3 sm:gap-4 sm:p-6">
 				{/* Titre et Trésorerie */}
-				<div className="flex items-center justify-center sm:justify-start gap-2">
-					<Landmark size={20} className="text-foreground" />
-					<h3 className="text-base sm:text-lg font-semibold text-foreground"> Budget</h3>
-				</div>
+			  	<SectionTitle icon={<Landmark size={16} className="sm:w-5 sm:h-5" />} title="Budget" />
 
 				{/* Barre de progression */}
 				<div className="space-y-2">

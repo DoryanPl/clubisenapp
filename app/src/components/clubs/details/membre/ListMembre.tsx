@@ -8,6 +8,7 @@ import { Eye, Edit, Trash2, Search, MoreVertical, Users } from 'lucide-react';
 import type { ClubID } from '@/types/Club/Club';
 import { membresExample } from '@/types/Membre/Membre';
 import { PaginationSection } from "@/components/PaginationSection";
+import SectionTitle from "@/components/SectionTitle";
 
 const columns = [
 	{ label: "NOM", id: "nom"},
@@ -278,11 +279,11 @@ export default function ListMembre(props: ClubID) {
 
 	return (
 		<div className="w-full bg-primary border border-default-200 shadow-sm dark:shadow-xl rounded-xl p-3 sm:p-6">
-			<div className="flex items-center gap-2 text-foreground justify-center sm:justify-start" style={{ paddingBottom: '12px' }}>
-				<span className="inline-flex"><Users size={16} className="sm:w-5 sm:h-5" /></span>
-				<span className="text-base sm:text-lg font-bold text-foreground">Activités des heures</span>
-        	</div>
-
+			
+			<div className="mb-4">
+				<SectionTitle icon={<Users size={16} className="sm:w-5 sm:h-5" />} title="Activités des heures" />
+			</div>
+			
 			<Table
 				isHeaderSticky
 				aria-label="Table des membres du club"

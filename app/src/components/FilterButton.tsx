@@ -55,7 +55,7 @@ export function FilterButton({
             <DropdownTrigger>
                 <Button className={buttonClassName}>
                 {icon}
-                <span className="text-sm sm:text-base">{label}</span>
+                <span>{label}</span>
                 </Button>
             </DropdownTrigger>
             {isOpen && (
