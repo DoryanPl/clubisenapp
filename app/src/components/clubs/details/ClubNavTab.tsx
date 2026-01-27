@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Eye, Users, Wallet } from 'lucide-react';
-import NavTabs from '../../NavTab';
+import NavTabs from '../../commons/NavTab';
 import TabMembre from './membre/TabMembre';
 import TabOverview from './overview/TabOverview';
 import TabBudget from './budget/TabBudget';

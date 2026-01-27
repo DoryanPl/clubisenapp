@@ -9,7 +9,7 @@ import NextLink from "next/link";
 import { LayoutGrid, Users, Wallet, UserRound, ClipboardList, Drama } from "lucide-react";
 import SwitchDarkMode from "./SwitchDarkMode";
 import Image from "next/image";
-import logo from "../../public/logo.svg";
+import logo from "@/../public/logo.svg";
 
 const navItems = [
   { path: "/", label: "Accueil", icon: LayoutGrid },

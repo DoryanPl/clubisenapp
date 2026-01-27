@@ -1,6 +1,6 @@
 import React from 'react';
-import HeureItem from '@/components/HeureItem';
-import SectionTitle from '@/components/SectionTitle';
+import HeureItem from '@/components/commons/HeureItem';
+import SectionTitle from '@/components/commons/SectionTitle';
 import { MembreID } from '@/types/Membre/Membre';
 import { heureExample } from '@/types/Heure/Heure';
 import { History } from 'lucide-react';

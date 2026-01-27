@@ -5,11 +5,11 @@ import { Card, CardBody, Input } from '@heroui/react';
 import { History, Search } from 'lucide-react';
 import { heureExample } from '@/types/Heure/Heure';
 import type { ClubID } from '@/types/Club/Club';
-import { DateSelector } from '@/components/DateSelector';
-import { FilterButton } from '@/components/FilterButton';
-import { PaginationSection } from '@/components/PaginationSection';
-import HeureItem from '@/components/HeureItem';
-import SectionTitle from '@/components/SectionTitle';
+import { DateSelector } from '@/components/commons/DateSelector';
+import { FilterButton } from '@/components/commons/FilterButton';
+import { PaginationSection } from '@/components/commons/PaginationSection';
+import HeureItem from '@/components/commons/HeureItem';
+import SectionTitle from '@/components/commons/SectionTitle';
 
 
 const HeurePerPage = [5, 10, 15];

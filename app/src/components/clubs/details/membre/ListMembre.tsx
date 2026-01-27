@@ -3,12 +3,12 @@
 import React from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, 
 	Chip, Input, DropdownItem, DropdownMenu, DropdownTrigger, Button, Dropdown } from "@heroui/react";
-import { FilterButton } from '@/components/FilterButton';
+import { FilterButton } from '@/components/commons/FilterButton';
 import { Eye, Edit, Trash2, Search, MoreVertical, Users } from 'lucide-react';
 import type { ClubID } from '@/types/Club/Club';
 import { membresExample } from '@/types/Membre/Membre';
-import { PaginationSection } from "@/components/PaginationSection";
-import SectionTitle from "@/components/SectionTitle";
+import { PaginationSection } from "@/components/commons/PaginationSection";
+import SectionTitle from "@/components/commons/SectionTitle";
 
 const columns = [
 	{ label: "NOM", id: "nom"},

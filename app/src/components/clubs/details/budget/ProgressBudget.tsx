@@ -5,7 +5,7 @@ import { Progress, Card, CardBody } from "@heroui/react";
 import { budgetSummaryExample } from "@/types/Budget/Budget";
 import { Landmark } from "lucide-react";
 import type { ClubID } from '@/types/Club/Club';
-import SectionTitle from "@/components/SectionTitle";
+import SectionTitle from "@/components/commons/SectionTitle";
 
 export default function ProgressBudget(props: ClubID) {
 	const clubID = props.id;

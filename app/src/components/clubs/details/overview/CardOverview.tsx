@@ -5,7 +5,7 @@ import { User, Crown, Wallet } from 'lucide-react';
 import {budgetSummaryExample } from '@/types/Budget/Budget';
 import { membresExample } from '@/types/Membre/Membre';
 import type { ClubID } from '@/types/Club/Club';
-import { CardInfo } from '@/components/CardInfo';
+import { CardInfo } from '@/components/commons/CardInfo';
 
 export default function CardOverview(props: ClubID) {
     const clubID = props.id;

@@ -1,8 +1,8 @@
 // src/components/ThemeSwitcher.jsx
 import React from "react";
 import { Button } from "@heroui/react";
-import useDarkMode from "../assets/useDarkMode";
-import DarkModeIcon from "../assets/darkmode.svg";
+import useDarkMode from "@/assets/useDarkMode";
+import DarkModeIcon from "@/assets/darkmode.svg";
 import Image from "next/image";
 
 export default function SwitchDarkMode() {

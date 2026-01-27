@@ -4,7 +4,7 @@ import React from 'react';
 import { TrendingUp, TrendingDown, Wallet } from 'lucide-react';
 import {budgetSummaryExample } from '@/types/Budget/Budget';
 import type { ClubID } from '@/types/Club/Club';
-import { CardInfo } from '@/components/CardInfo';
+import { CardInfo } from '@/components/commons/CardInfo';
 
 export default function CardBudget(props: ClubID) {
   const clubID = props.id;

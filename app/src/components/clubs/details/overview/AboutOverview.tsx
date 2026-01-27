@@ -5,7 +5,7 @@ import { Card, CardBody } from '@heroui/react';
 import { Info } from 'lucide-react';
 import type { ClubID } from '@/types/Club/Club';
 import { clubsExample } from '@/types/Club/Club';
-import SectionTitle from '@/components/SectionTitle';
+import SectionTitle from '@/components/commons/SectionTitle';
 
 export default function AboutOverview(props: ClubID) {
     const clubID = props.id;
