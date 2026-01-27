@@ -66,7 +66,7 @@ export function FilterButton({
                   disallowEmptySelection={disallowEmptySelection}
                   closeOnSelect={closeOnSelect}
                   classNames={{
-                      list: dropdownMenuClassName,
+                      list: `${dropdownMenuClassName} max-h-80 overflow-y-auto`,
                   }}
               >
                   {showSearch ? (
@@ -76,6 +76,7 @@ export function FilterButton({
                         textValue="search" 
                         className="mb-2 without-bg"
                         classNames={{
+                          selectedIcon: "hidden",
                         }}
                         isReadOnly
                       >
@@ -84,6 +85,7 @@ export function FilterButton({
                             startContent={<Search size={16} />}
                             value={searchValue}
                             onValueChange={setSearchValue}
+                            autoFocus
                             size="sm"
                             isClearable
                             radius="lg"
