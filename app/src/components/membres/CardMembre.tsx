@@ -1,8 +1,10 @@
+"use client";
+
 import React from "react";
+import { useRouter } from "next/navigation";
 import { membresExample } from "@/types/Membre/Membre";
 import { Card, CardBody, CardFooter, Avatar } from "@heroui/react";
 import { Mail, Calendar } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 
 interface CardMembreProps {
@@ -10,12 +12,11 @@ interface CardMembreProps {
 }
 
 function CardMembre({ searchTerm = '' }: CardMembreProps) {
+  const router = useRouter();
   const filteredMembres = membresExample.filter(membre => 
     membre.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
     membre.nom.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const getRedirection = (id: string) => `/membres/details/${id}`;
   
   return (
     <motion.div
@@ -25,16 +26,12 @@ function CardMembre({ searchTerm = '' }: CardMembreProps) {
     >
       <div className="gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 pt-6 px-4 sm:px-6 lg:px-8">
         {filteredMembres.map((membre, index) => (
-          <Link 
-            key={index} 
-            href={getRedirection(membre.MembreID.toString())}
-            className="no-underline h-full flex">
+          <div key={index} className="h-full flex">
             <Card
               isPressable
-              key={membre.MembreID}
               shadow="sm"
-              className="bg-primary/60 relative border border-default-200 hover:border-secondary transition-all hover:shadow-lg hover:shadow-secondary/50  flex flex-col w-full"
-              onPress={() => console.log("item pressed")}>
+              className="bg-primary/60 relative border border-default-200 hover:border-secondary transition-all hover:shadow-lg hover:shadow-secondary/50  flex flex-col w-full cursor-pointer"
+              onPress={() => router.push(`/membres/details/${membre.MembreID.toString()}`)}>
               <span
                 className={`absolute top-3 right-3 h-3 w-3 rounded-full animate-pulse shadow-[0_0_0_6px_rgba(0,0,0,0.04)] ${
                   membre.isActive ? "bg-emerald-500 shadow-[0_0_0_6px_rgba(16,185,129,0.25)]" : "bg-rose-500 shadow-[0_0_0_6px_rgba(244,63,94,0.25)]"
@@ -76,7 +73,7 @@ function CardMembre({ searchTerm = '' }: CardMembreProps) {
                 </span>
               </CardFooter>
             </Card>
-          </Link>
+          </div>
         ))}
       </div>
     </motion.div>

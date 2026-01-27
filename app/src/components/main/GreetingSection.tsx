@@ -1,6 +1,8 @@
-﻿import React from 'react';
+﻿"use client";
+
+import React from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { Plus } from 'lucide-react';
 import { Button } from '@heroui/react';
 
@@ -9,6 +11,8 @@ interface GreetingSectionProps {
 }
 
 export default function GreetingSection({ name }: GreetingSectionProps) {
+  const router = useRouter();
+
   return (
     <section className="px-4 sm:px-6 lg:px-8 pt-8 pb-12 max-w-7xl mx-auto w-full">
       <motion.div
@@ -25,15 +29,14 @@ export default function GreetingSection({ name }: GreetingSectionProps) {
             Voici l'essentiel de ta vie associative.
           </p>
         </div>
-        <Link href="/hours">
-          <Button
-            className="bg-secondary hover:bg-secondary/90 text-background font-semibold whitespace-nowrap"
-            size="lg"
-            startContent={<Plus size={20} />}
-          >
-            Déclarer des heures
-          </Button>
-        </Link>
+        <Button
+          onClick={() => router.push('/hours')}
+          className="bg-secondary hover:bg-secondary/90 text-background font-semibold whitespace-nowrap"
+          size="lg"
+          startContent={<Plus size={20} />}
+        >
+          Déclarer des heures
+        </Button>
       </motion.div>
     </section>
   );

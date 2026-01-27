@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, 
-  Link, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
-import NextLink from "next/link";
+  Link, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
 import { LayoutGrid, Users, Wallet, UserRound, ClipboardList, Drama } from "lucide-react";
 import SwitchDarkMode from "./SwitchDarkMode";
 import Image from "next/image";
@@ -30,6 +29,7 @@ export function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <>
@@ -37,9 +37,10 @@ export function NavBar() {
       <Navbar maxWidth="full" className="px-4 sm:px-4 py-2 shadow-sm dark:shadow-xl bg-primary border-b" style={{ borderBottomColor: '#444444' }}>
         <NavbarContent justify="start" className="sm:hidden flex-1">
           <NavbarItem>
-            <button
+            <Button
+              isIconOnly
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-foreground p-2 hover:bg-secondary/10 rounded-lg transition-colors relative w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+              className="text-foreground hover:bg-secondary/10"
               aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             >
               <motion.span
@@ -65,15 +66,20 @@ export function NavBar() {
                 transition={{ duration: 0.3 }}
                 className="w-6 h-0.5 bg-current"
               />
-            </button>
+            </Button>
           </NavbarItem>
         </NavbarContent>
 
         {/* Logo */}
         <NavbarBrand className="flex-1 justify-center sm:justify-start">
-          <NextLink href="/" className="inline-flex items-center" aria-label="Aller à l'accueil">
+          <Button 
+            isIconOnly
+            onClick={() => router.push("/")} 
+            className="bg-transparent hover:bg-transparent cursor-pointer" 
+            aria-label="Aller à l'accueil"
+          >
             <Image src={logo} alt="ClubIsen Logo" width={128} height={32} />
-          </NextLink>
+          </Button>
         </NavbarBrand>
 
         {/* Navbar desktop */}
@@ -84,23 +90,21 @@ export function NavBar() {
             const isHovered = hoveredPath === item.path;
 
             return (
-              <NavbarItem
+              <div
                 key={item.path}
-                isActive={isActive}
                 onMouseEnter={() => setHoveredPath(item.path)}
                 onMouseLeave={() => setHoveredPath(null)}
                 className="relative"
               >
-                <Link
-                  color={"foreground"}
-                  href={item.path}
-                  className={`flex items-center gap-2 px-2 py-1 text-sm transition-colors ${
+                <Button
+                  onClick={() => router.push(item.path)}
+                  className={`flex items-center gap-2 px-2 py-1 text-sm transition-colors bg-transparent hover:bg-transparent ${
                     isActive ? 'text-secondary' : isHovered ? 'text-foreground' : 'text-foreground/70'
                   }`}
                 >
                   <IconComponent size={20} />
                   {item.label}
-                </Link>
+                </Button>
 
                 <motion.div
                   className="absolute -bottom-2 left-0 h-[3px] bg-secondary rounded-full"
@@ -109,7 +113,7 @@ export function NavBar() {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   style={{ originX: 0 }} 
                 />
-              </NavbarItem>
+              </div>
             );
           })}
         </NavbarContent>
@@ -156,11 +160,13 @@ export function NavBar() {
                   const isActive = item.path === "/" ? pathname === "/" : pathname.startsWith(item.path);
 
                   return (
-                    <Link
+                    <Button
                       key={item.path}
-                      href={item.path}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-colors ${
+                      onClick={() => {
+                        router.push(item.path);
+                        setIsMenuOpen(false);
+                      }}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-colors w-full bg-transparent hover:bg-secondary/10 justify-start ${
                         isActive
                           ? "bg-secondary/10 text-secondary"
                           : "text-foreground hover:bg-secondary/10"
@@ -168,7 +174,7 @@ export function NavBar() {
                     >
                       <IconComponent size={20} />
                       <span className="text-base">{item.label}</span>
-                    </Link>
+                    </Button>
                   );
                 })}
               </div>
@@ -183,16 +189,23 @@ export function NavBar() {
 
 {/* Profil menu desktop */}
 function ProfilMenu() {
+  const router = useRouter();
+
   const handleAction = (key: any) => {
-    if (key === "logout") console.log("Logging out...");
+    if (key === "logout") {
+      console.log("Logging out...");
+    }
   };
 
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
-        <button className="cursor-pointer transition-transform hover:scale-110 p-1 rounded-full border-2 border-foreground">
+        <Button
+          isIconOnly
+          className="cursor-pointer transition-transform hover:scale-110 bg-transparent hover:bg-transparent border-2 border-foreground"
+        >
           <UserRound size={20} />
-        </button>
+        </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat" onAction={handleAction}>
         {profilMenuItems.map((item) => (
@@ -200,7 +213,7 @@ function ProfilMenu() {
             key={item.key}
             color={item.key === "logout" ? "danger" : "default"}
             className={item.key === "logout" ? "text-danger" : ""}
-            href={item.path}
+            onClick={() => router.push(item.path)}
           >
             {item.label}
           </DropdownItem>

@@ -1,14 +1,18 @@
+"use client";
+
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import HeureItem from '@/components/commons/HeureItem';
 import SectionTitle from '@/components/commons/SectionTitle';
 import { MembreID } from '@/types/Membre/Membre';
 import { heureExample } from '@/types/Heure/Heure';
 import { History } from 'lucide-react';
-import { Card, CardBody, CardFooter, Link } from '@heroui/react';
+import { Card, CardBody, CardFooter } from '@heroui/react';
 
 
 
 export default function HeureMembre(props : MembreID) {
+    const router = useRouter();
     const membreID = props.id;
     const HeureItems = heureExample.filter(h => h.MembreID === membreID);
 
@@ -32,9 +36,12 @@ export default function HeureMembre(props : MembreID) {
             </CardBody>
             <CardFooter className="py-0 px-6 flex justify-end">
                 <div className="w-full border-t border-default-200 !py-5 flex justify-end">
-                    <Link underline="hover" href='#' className="text-sm font-semibold text-secondary hover:text-secondary/80">
+                    <span 
+                        onClick={() => router.push(`/membres/details/${membreID}/heures`)}
+                        className="text-sm font-semibold text-secondary hover:text-secondary/80 cursor-pointer"
+                    >
                         Voir l'historique complet
-                    </Link>
+                    </span>
                 </div>
             </CardFooter>
 

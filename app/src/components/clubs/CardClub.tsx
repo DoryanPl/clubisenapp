@@ -1,8 +1,10 @@
+"use client";
+
 import React from "react";
+import { useRouter } from "next/navigation";
 import { clubsExample } from "@/types/Club/Club";
 import {Card, CardBody, CardFooter, CardHeader, Image} from "@heroui/react";
 import { Users, Calendar } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 
 interface CardClubProps {
@@ -10,11 +12,11 @@ interface CardClubProps {
 }
 
 function CardClub({ searchTerm = '' }: CardClubProps) {
+  const router = useRouter();
   const filteredClubs = clubsExample.filter(club => 
     club.ClubNom.toLowerCase().includes(searchTerm.toLowerCase()) ||
     club.ClubDesc.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const getRedirection = (id: number) => `/clubs/details/${id}`;
 
   return(
     <motion.div
@@ -24,15 +26,12 @@ function CardClub({ searchTerm = '' }: CardClubProps) {
     >
       <div className="gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 pt-6 px-4 sm:px-6 lg:px-8">
         {filteredClubs.map((item, index) => (
-          <Link 
-            key={index} 
-            href={getRedirection(item.id)}
-            className="no-underline h-full flex">
+          <div key={index} className="h-full flex">
             <Card 
               isPressable 
               shadow="sm" 
-              className="bg-primary/60 relative border border-default-200 shadow-xlhover:border-secondary transition-all hover:shadow-lg hover:shadow-secondary/50 flex flex-col group w-full" 
-              onPress={() => console.log("item pressed")}>
+              className="bg-primary/60 relative border border-default-200 shadow-xlhover:border-secondary transition-all hover:shadow-lg hover:shadow-secondary/50 flex flex-col group w-full cursor-pointer" 
+              onPress={() => router.push(`/clubs/details/${item.id}`)}>
 
               <CardHeader className="p-0 m-0 flex-shrink-0 relative w-full h-[120px] sm:h-[140px] lg:h-[150px] overflow-hidden">
                 <Image
@@ -63,7 +62,7 @@ function CardClub({ searchTerm = '' }: CardClubProps) {
                 </span>
               </CardFooter>
           </Card>
-          </Link>
+          </div>
         ))}
       </div>
     </motion.div>

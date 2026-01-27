@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody, Avatar } from "@heroui/react";
+import { Card, CardBody, Avatar, Button } from "@heroui/react";
 import { Mail, Clock, Check, GraduationCap, MessageSquare, Drama } from "lucide-react";
 import { membresExample } from "@/types/Membre/Membre";
 import type { MembreID } from "@/types/Membre/Membre";
@@ -128,10 +128,14 @@ export default function CardInfoMembre(props: MembreID) {
               </div>
 
               {/* Contact Button */}
-              <button className="w-full bg-secondary/80 hover:bg-secondary-dark/70 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors">
-                <MessageSquare size={20} />
+              <Button
+                fullWidth
+                className="bg-secondary/80 hover:bg-secondary text-white font-semibold py-3 px-4"
+                size="lg"
+                startContent={<MessageSquare size={20} />}
+              >
                 Contacter l'étudiant
-              </button>
+              </Button>
           </CardBody>
       </Card>
   );
