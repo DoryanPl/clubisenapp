@@ -21,7 +21,7 @@ export default function CardBudget(props: ClubID) {
   };
 
   return (
-    <div className="grid grid-cols-3 gap-2 sm:gap-4">
+    <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full">
       <CardInfo
         title="Trésorerie"
         value={totalTresor}

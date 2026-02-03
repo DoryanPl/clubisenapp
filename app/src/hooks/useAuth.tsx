@@ -10,6 +10,7 @@ interface User {
   phone: string;
   city: string;
   role: string;
+  avatar?: string;
 }
 
 interface AuthContextType {
@@ -54,6 +55,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         phone: '+33 6 12 34 56 78',
         city: 'Brest',
         role: 'Étudiant',
+        avatar: 'https://i.pravatar.cc/150?img=1',
       };
 
       setUser(mockUser);

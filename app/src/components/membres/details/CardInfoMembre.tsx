@@ -130,7 +130,7 @@ export default function CardInfoMembre(props: MembreID) {
               {/* Contact Button */}
               <Button
                 fullWidth
-                className="bg-secondary/80 hover:bg-secondary text-white font-semibold py-3 px-4"
+                className="bg-secondary hover:bg-secondary/90 text-background font-semibold py-3 px-4"
                 size="lg"
                 startContent={<MessageSquare size={20} />}
               >

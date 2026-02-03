@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { clubsExample } from "@/types/Club/Club";
 import {Card, CardBody, CardFooter, CardHeader, Image} from "@heroui/react";
 import { Users, Calendar } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface CardClubProps {
   searchTerm?: string;
@@ -19,18 +18,13 @@ function CardClub({ searchTerm = '' }: CardClubProps) {
   );
 
   return(
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 pt-6 px-4 sm:px-6 lg:px-8">
-        {filteredClubs.map((item, index) => (
+    <div className="gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 pt-6 px-4 sm:px-6 lg:px-8">
+      {filteredClubs.map((item, index) => (
           <div key={index} className="h-full flex">
             <Card 
               isPressable 
               shadow="sm" 
-              className="bg-primary/60 relative border border-default-200 shadow-xlhover:border-secondary transition-all hover:shadow-lg hover:shadow-secondary/50 flex flex-col group w-full cursor-pointer" 
+              className="bg-primary/60 relative border border-default-200 shadow-lg dark:shadow-xl h-full hover:border-secondary/50 transition-colors flex flex-col group w-full cursor-pointer" 
               onPress={() => router.push(`/clubs/details/${item.id}`)}>
 
               <CardHeader className="p-0 m-0 flex-shrink-0 relative w-full h-[120px] sm:h-[140px] lg:h-[150px] overflow-hidden">
@@ -42,9 +36,9 @@ function CardClub({ searchTerm = '' }: CardClubProps) {
                   src={item.ClubImage}
                   width="100%"
                 />
-                <div className="absolute top-2 right-2 bg-secondary/80 rounded-lg px-2 py-1 flex items-center gap-1 z-10">
-                  <Users size={16} className="text-white" />
-                  <span className="text-sm text-white font-bold">{item.memberCount}</span>
+                <div className="absolute top-2 right-2 bg-secondary hover:bg-secondary/90 rounded-lg px-2 py-1 flex items-center gap-1 z-10">
+                  <Users size={16} className="text-background" />
+                  <span className="text-sm text-background font-semibold">{item.memberCount}</span>
                 </div>
               </CardHeader>
 
@@ -65,7 +59,6 @@ function CardClub({ searchTerm = '' }: CardClubProps) {
           </div>
         ))}
       </div>
-    </motion.div>
-  );
-}
-export default CardClub;
+    );
+  }
+  export default CardClub;

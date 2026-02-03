@@ -32,7 +32,7 @@ export function FilterButton({
   icon = <Funnel size={16} />,
   className = '',
   buttonClassName = 'bg-default-100 flex items-center gap-2 px-3 sm:px-4 py-2 border border-default-200 shadow-sm dark:shadow-xl rounded-lg hover:bg-default-100 transition-colors sm:flex-none justify-center w-full',
-  dropdownMenuClassName = 'bg-primary p-2 rounded-lg shadow-lg border border-default-200',
+  dropdownMenuClassName = 'bg-primary p-2 rounded-lg border border-default-200',
   selectionMode = 'single',
   disallowEmptySelection = true,
   closeOnSelect = false,
@@ -77,7 +77,7 @@ export function FilterButton({
                   disallowEmptySelection={disallowEmptySelection}
                   closeOnSelect={closeOnSelect}
                   classNames={{
-                      list: `${dropdownMenuClassName} max-h-80 overflow-y-auto`,
+                      list: `${dropdownMenuClassName} max-h-90 overflow-y-auto`,
                   }}
               >
                   {showSearch ? (
@@ -101,7 +101,7 @@ export function FilterButton({
                             isClearable
                             radius="lg"
                             classNames={{
-                              inputWrapper: "border border-default-200 ",
+                              inputWrapper: "bg-default-200/50 border border-default-200 hover:border-default-400",
                             }}
                           />
                       </DropdownItem>

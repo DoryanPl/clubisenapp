@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 export default function useDarkMode() {
-  // Render the same markup on server and client, then sync theme after mount
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark" | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     const preferred = (() => {
@@ -13,10 +13,11 @@ export default function useDarkMode() {
     })();
 
     setTheme(preferred);
+    setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || !isMounted || !theme) return;
     const root = window.document.documentElement;
     if (theme === "dark") {
       root.classList.add("dark");
@@ -25,7 +26,7 @@ export default function useDarkMode() {
       root.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
-  }, [theme]);
+  }, [theme, isMounted]);
 
-  return [theme, setTheme] as const;
+  return [theme || "light", setTheme] as const;
 }

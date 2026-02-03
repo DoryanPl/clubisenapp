@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { TrendingUp, TrendingDown, Wallet, History } from 'lucide-react';
 import { clubsExample } from '@/types/Club/Club';
 import { budgetExample, budgetSummaryExample, Budget} from '@/types/Budget/Budget';
@@ -9,6 +10,28 @@ import PageTitle from '@/components/commons/PageTitle';
 import TransactionItem from '@/components/commons/TransactionItem';
 import HistoryList from '@/components/commons/HistoryList';
 import GraphBudget from '@/components/budget/GraphBudget';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 
 
 const CLUBS_DATA = [
@@ -140,7 +163,11 @@ export default function BudgetPage() {
 
 
   return (
-    <div>
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <PageTitle 
         title="Trésorerie des Clubs" 
         description="Consultez les budgets alloués aux différents clubs du campus."
@@ -152,45 +179,51 @@ export default function BudgetPage() {
         showSearch={false}
       />
 
-      <div className="pt-6 px-4 sm:px-6 lg:px-8 grid grid-cols-3 gap-2 sm:gap-4">
-        <CardInfo
-          title="Solde"
-          value={totalSolde}
-          icon={<Wallet size={20} />}
-          color="text-emerald-500"
-          formatter={formatCurrency}
-          cardClassName="bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-500/20 dark:to-emerald-600/10 border-2 border-emerald-400 dark:border-emerald-500/40 shadow-lg"
-        />
-        <CardInfo
-          title="Total Recettes"
-          value={totalIncome}
-          icon={<TrendingUp size={20} />}
-          color="text-blue-500"
-          prefix="+"
-          formatter={formatCurrency}
-          cardClassName="bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-500/20 dark:to-blue-600/10 border-2 border-blue-400 dark:border-blue-500/40 shadow-lg"
-        />
-        <CardInfo
-          title="Total Dépenses"
-          value={totalExpense}
-          icon={<TrendingDown size={20} />}
-          color="text-red-500"
-          prefix="-"
-          formatter={formatCurrency}
-          cardClassName="bg-gradient-to-br from-red-100 to-red-50 dark:from-red-500/20 dark:to-red-600/10 border-2 border-red-400 dark:border-red-500/40 shadow-lg"
-        />
-      </div>
+      <motion.div className="pt-6 px-4 sm:px-6 lg:px-8 grid grid-cols-3 gap-2 sm:gap-4" variants={itemVariants}>
+        <motion.div variants={itemVariants}>
+          <CardInfo
+            title="Solde"
+            value={totalSolde}
+            icon={<Wallet size={20} />}
+            color="text-emerald-500"
+            formatter={formatCurrency}
+            cardClassName="bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-500/20 dark:to-emerald-600/10 border-2 border-emerald-400 dark:border-emerald-500/40 shadow-lg"
+          />
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <CardInfo
+            title="Total Recettes"
+            value={totalIncome}
+            icon={<TrendingUp size={20} />}
+            color="text-blue-500"
+            prefix="+"
+            formatter={formatCurrency}
+            cardClassName="bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-500/20 dark:to-blue-600/10 border-2 border-blue-400 dark:border-blue-500/40 shadow-lg"
+          />
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <CardInfo
+            title="Total Dépenses"
+            value={totalExpense}
+            icon={<TrendingDown size={20} />}
+            color="text-red-500"
+            prefix="-"
+            formatter={formatCurrency}
+            cardClassName="bg-gradient-to-br from-red-100 to-red-50 dark:from-red-500/20 dark:to-red-600/10 border-2 border-red-400 dark:border-red-500/40 shadow-lg"
+          />
+        </motion.div>
+      </motion.div>
 
-      <div className="pt-8 px-4 sm:px-6 lg:px-8">
+      <motion.div className="pt-8 px-4 sm:px-6 lg:px-8" variants={itemVariants}>
         <GraphBudget
           balanceData={balanceData}
           isDarkMode={isDarkMode}
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
         />
-      </div>
+      </motion.div>
 
-      <div className="pt-8 px-4 sm:px-6 lg:px-8">
+      <motion.div className="pt-8 px-4 sm:px-6 lg:px-8" variants={itemVariants}>
         <HistoryList<Budget>
           icon={<History size={16} className="sm:w-5 sm:h-5" />}
           title="Historique des transactions"
@@ -206,7 +239,7 @@ export default function BudgetPage() {
           formatDate={formatDate}
           onRenderItem={(item) => <TransactionItem key={item.BudgetID} transaction={item} />}
         />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

@@ -20,6 +20,7 @@ interface PageTitleProps {
   onFilterChange?: (selectedKeys: Set<string>) => void;
   showSearch?: boolean;
   onSearch?: (value: string) => void;
+  showButton?: boolean;
 }
 
 function PageTitle({ 
@@ -31,7 +32,8 @@ function PageTitle({
   filterLabel = "Filtre",
   onFilterChange,
   showSearch = true,
-  onSearch
+  onSearch,
+  showButton = true,
 }: PageTitleProps) {
   const [filterValue, setFilterValue] = useState<Set<string>>(selectedFilter);
 
@@ -76,7 +78,7 @@ function PageTitle({
               startContent={<Search size={18} />}
               onValueChange={(value) => onSearch?.(value)}
               classNames={{
-                inputWrapper: "border border-default-100 shadow-sm dark:shadow-xl bg-primary focus-within:bg-primary",
+                inputWrapper: "bg-default-200/50 border border-default-200 hover:border-default-400",
               }}
             />
           </div>
@@ -93,9 +95,11 @@ function PageTitle({
           )
         )}
 
-        <Button color="secondary" className="text-white bg-secondary/80 font-bold whitespace-nowrap flex-shrink-0" startContent={<Plus size={20} />}>
-          <span className="hidden sm:inline">Créer un {type}</span>
-        </Button>
+        {showButton && (
+          <Button className="bg-secondary hover:bg-secondary/90 text-background font-semibold whitespace-nowrap flex-shrink-0" startContent={<Plus size={20} />}>
+            <span className="hidden sm:inline">Créer un {type}</span>
+          </Button>
+        )}
       </div>
     </div>
   );

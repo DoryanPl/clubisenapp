@@ -1,188 +1,144 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import logo from '@/../public/logo.svg';
-import { Button, Link, Divider } from '@heroui/react';
-
-const containerVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0 },
-};
+import { Link, Divider, Button } from '@heroui/react';
+import BackToTop from './BackToTop';
 
 export function Footer() {
+  const router = useRouter();
   const currentYear = new Date().getFullYear();
 
-  const footerLinks = [
-    {
-      title: 'Navigation',
-      links: [
-        { label: 'Accueil', href: '/' },
-        { label: 'Clubs', href: '/clubs' },
-        { label: 'Membres', href: '/membres' },
-        { label: 'Budget', href: '/budget' },
-      ],
-    },
-    {
-      title: 'Ressources',
-      links: [
-        { label: 'À propos', href: '#' },
-        { label: 'Contact', href: '#' },
-        { label: 'FAQ', href: '#' },
-        { label: 'Support', href: '#' },
-      ],
-    },
-    {
-      title: 'Légal',
-      links: [
-        { label: 'Conditions d\'utilisation', href: '#' },
-        { label: 'Politique de confidentialité', href: '#' },
-        { label: 'Cookies', href: '#' },
-        { label: 'Accessibilité', href: '#' },
-      ],
-    },
+  const ContactInfo = [
+    { icon: MapPin, text: 'Brest, France', key: 'location' },
+    { icon: Mail, text: 'contact@clubisen.fr', key: 'email' },
+    { icon: Phone, text: '+33 2 98 00 00 00', key: 'phone' },
   ];
 
-  const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  const QuickLinks = [
+    { href: '/', label: 'Accueil', key: 'home' },
+    { href: '/clubs', label: 'Clubs', key: 'clubs' },
+    { href: '/membres', label: 'Membres', key: 'members' },
+    { href: '/budget', label: 'Budget', key: 'budget' },
   ];
 
   return (
-    <motion.footer
-      className="bg-primary border-t border-default-200 mt-12 sm:mt-16"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={containerVariants}
-    >
-      {/* Main Footer Content */}
-      <div className="px-4 sm:px-6 lg:px-8 py-12 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-          {/* Brand Section */}
-          <motion.div className="lg:col-span-1" variants={itemVariants}>
-            <div className="flex items-center gap-3 mb-4">
-              <Image src={logo} alt="ClubIsen" width={40} height={40} />
-              <h3 className="text-xl font-bold text-foreground">ClubIsen</h3>
+    <footer className="bg-primary border-t border-default-200 mt-12 sm:mt-16">
+      <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-7xl mx-auto">
+          
+        {/* Mobile Brand Section */}
+        <div className="block sm:hidden">
+          <div className="mb-6 pb-6 border-b border-default-200">
+            <div className="flex items-center gap-2 mb-3">
+              <Image src={logo} alt="ClubIsen" width={32} height={32} />
+              <h3 className="text-base font-bold text-foreground">ClubIsen</h3>
             </div>
-            <p className="text-foreground/60 text-sm mb-4">
+            <p className="text-foreground/60 text-xs">
               Gestion des clubs étudiants de l'ISEN Yncréa Ouest
             </p>
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-foreground/60">
-                <MapPin size={16} />
-                <span className="text-sm">Brest, France</span>
-              </div>
-              <div className="flex items-center gap-2 text-foreground/60">
-                <Mail size={16} />
-                <span className="text-sm">contact@clubisen.fr</span>
-              </div>
-              <div className="flex items-center gap-2 text-foreground/60">
-                <Phone size={16} />
-                <span className="text-sm">+33 2 98 00 00 00</span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-6 mb-6">
+            {/* Contact Info */}
+            <div className="col-span-1">
+              <h4 className="text-xs font-semibold text-foreground mb-3">Contact</h4>
+              <div className="space-y-2">
+                {ContactInfo.map((item) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <div key={item.key} className="flex items-center gap-2 text-foreground/60">
+                      <IconComponent size={14} />
+                      <span className="text-xs">{item.text}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          </motion.div>
 
-          {/* Footer Links Sections */}
-          {footerLinks.map((section, idx) => (
-            <motion.div key={idx} variants={itemVariants}>
-              <h4 className="text-sm font-bold text-foreground uppercase mb-4">
-                {section.title}
-              </h4>
-              <ul className="space-y-2">
-                {section.links.map((link, linkIdx) => (
-                  <li key={linkIdx}>
-                    <Link
-                      href={link.href}
-                      className="text-foreground/60 hover:text-secondary text-sm transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-
-          {/* Social Links */}
-          <motion.div variants={itemVariants}>
-            <h4 className="text-sm font-bold text-foreground uppercase mb-4">
-              Nous suivre
-            </h4>
-            <div className="flex flex-wrap gap-3">
-              {socialLinks.map((social, idx) => {
-                const IconComponent = social.icon;
-                return (
-                  <Button
-                    key={idx}
-                    isIconOnly
-                    as="a"
-                    href={social.href}
-                    className="bg-default-200/50 hover:bg-secondary hover:text-background text-foreground transition-colors"
-                    aria-label={social.label}
+            {/* Quick Links */}
+            <div className="col-span-1">
+              <h4 className="text-xs font-semibold text-foreground mb-3">Navigation</h4>
+              <div className="flex flex-col space-y-2">
+                {QuickLinks.map((link) => (
+                  <span
+                    key={link.key}
+                    onClick={() => router.push(link.href)}
+                    className="text-foreground/60 hover:text-secondary text-xs transition-colors cursor-pointer w-fit"
                   >
-                    <IconComponent size={18} />
-                  </Button>
+                    {link.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Layout*/}
+        <div className="hidden sm:grid sm:grid-cols-3 sm:gap-8 mb-6">
+
+          {/* Brand Section */}
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <Image src={logo} alt="ClubIsen" width={32} height={32} />
+              <h3 className="text-lg font-bold text-foreground">ClubIsen</h3>
+            </div>
+            <p className="text-foreground/60 text-sm">
+              Gestion des clubs étudiants de l'ISEN Yncréa Ouest
+            </p>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h4 className="text-sm font-semibold text-foreground mb-3">Contact</h4>
+            <div className="space-y-2">
+              {ContactInfo.map((item) => {
+                const IconComponent = item.icon;
+                return (
+                  <div key={item.key} className="flex items-center gap-2 text-foreground/60">
+                    <IconComponent size={14} />
+                    <span className="text-sm">{item.text}</span>
+                  </div>
                 );
               })}
             </div>
-          </motion.div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-sm font-semibold text-foreground mb-3">Navigation</h4>
+            <div className="flex flex-col space-y-2">
+              {QuickLinks.map((link) => (
+                <span
+                  key={link.key}
+                  onClick={() => router.push(link.href)}
+                  className="text-foreground/60 hover:text-secondary text-sm transition-colors cursor-pointer w-fit"
+                >
+                  {link.label}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Divider */}
-        <Divider className="bg-default-300 my-8" />
+        <Divider className="bg-default-300 my-6" />
 
         {/* Bottom Section */}
-        <motion.div
-          className="flex flex-col sm:flex-row justify-between items-center gap-4"
-          variants={itemVariants}
-        >
-          <p className="text-foreground/60 text-sm">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+          <p className="text-foreground/60 text-xs sm:text-sm">
             © {currentYear} ClubIsen. Tous droits réservés.
           </p>
-          <div className="flex items-center gap-4 text-foreground/60 text-sm">
-            <Link href="#" className="text-secondary transition-colors">
-              Sitemap
-            </Link>
-            <div className="w-1 h-1 bg-default-300 rounded-full" />
-            <Link href="#" className="text-secondary transition-colors">
-              Signaler un bug
-            </Link>
-          </div>
-        </motion.div>
+          <Link href="#" className="text-secondary hover:text-secondary/80 text-xs sm:text-sm transition-colors">
+            Signaler un bug
+          </Link>
+        </div>
       </div>
 
-      {/* Floating Action - Back to Top */}
-      <motion.div
-        className="px-4 sm:px-6 lg:px-8 py-4 max-w-7xl mx-auto flex justify-end"
-        variants={itemVariants}
-      >
-        <Button
-          isIconOnly
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="bg-secondary hover:bg-secondary/90 text-background"
-          aria-label="Retour en haut"
-        >
-          ↑
-        </Button>
-      </motion.div>
-    </motion.footer>
+      {/* Back to Top Component */}
+      <BackToTop />
+    </footer>
   );
 }

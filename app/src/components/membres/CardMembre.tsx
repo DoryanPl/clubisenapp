@@ -5,13 +5,12 @@ import { useRouter } from "next/navigation";
 import { membresExample } from "@/types/Membre/Membre";
 import { Card, CardBody, CardFooter, Avatar } from "@heroui/react";
 import { Mail, Calendar } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface CardMembreProps {
   searchTerm?: string;
 }
 
-function CardMembre({ searchTerm = '' }: CardMembreProps) {
+export default function CardMembre({ searchTerm = '' }: CardMembreProps) {
   const router = useRouter();
   const filteredMembres = membresExample.filter(membre => 
     membre.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -19,18 +18,13 @@ function CardMembre({ searchTerm = '' }: CardMembreProps) {
   );
   
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 pt-6 px-4 sm:px-6 lg:px-8">
-        {filteredMembres.map((membre, index) => (
+    <div className="gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 pt-6 px-4 sm:px-6 lg:px-8">
+      {filteredMembres.map((membre, index) => (
           <div key={index} className="h-full flex">
             <Card
               isPressable
               shadow="sm"
-              className="bg-primary/60 relative border border-default-200 hover:border-secondary transition-all hover:shadow-lg hover:shadow-secondary/50  flex flex-col w-full cursor-pointer"
+              className="bg-primary/60 relative border border-default-200 shadow-lg dark:shadow-xl h-full hover:border-secondary/50 transition-colors flex flex-col w-full cursor-pointer"
               onPress={() => router.push(`/membres/details/${membre.MembreID.toString()}`)}>
               <span
                 className={`absolute top-3 right-3 h-3 w-3 rounded-full animate-pulse shadow-[0_0_0_6px_rgba(0,0,0,0.04)] ${
@@ -60,7 +54,7 @@ function CardMembre({ searchTerm = '' }: CardMembreProps) {
                   <span className="px-3 py-2 rounded-full bg-content2 text-foreground text-sm font-semibold text-center">
                     {membre.clubNom}
                   </span>
-                  <span className="px-3 py-2 rounded-full bg-secondary/80 text-white text-sm font-semibold text-center">
+                  <span className="px-3 py-2 rounded-full bg-secondary text-background font-semibold text-sm font-semibold text-center">
                     {membre.role}
                   </span>
                 </div>
@@ -76,8 +70,6 @@ function CardMembre({ searchTerm = '' }: CardMembreProps) {
           </div>
         ))}
       </div>
-    </motion.div>
-  );
-}
-
-export default CardMembre;
+    );
+  }
+  

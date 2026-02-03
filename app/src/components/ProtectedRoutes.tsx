@@ -21,7 +21,7 @@ export function ProtectedRoutes({ children }: { children: React.ReactNode }) {
     });
 
     if (!isLoggedIn && !isPublicRoute) {
-      router.push('/login');
+      router.push('/');
     }
   }, [isLoggedIn, isLoading, pathname, router]);
 

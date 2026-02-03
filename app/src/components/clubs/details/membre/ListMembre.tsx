@@ -214,7 +214,7 @@ export default function ListMembre(props: ClubID) {
 						onValueChange={onSearchChange}
 						className="w-full lg:w-96"
 						classNames={{
-							inputWrapper: "border border-default-200 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20",
+							inputWrapper: "bg-default-200/50 border border-default-200 hover:border-default-400",
 						}}
                     
 					/>

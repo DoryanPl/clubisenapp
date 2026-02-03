@@ -10,6 +10,7 @@ import SwitchDarkMode from "./SwitchDarkMode";
 import Image from "next/image";
 import logo from '@/assets/ISEN-logo.jpg';
 import { useAuth } from "@/hooks/useAuth";
+import { list } from "@material-tailwind/react";
 
 const allNavItems = [
   { path: "/", label: "Accueil", icon: LayoutGrid },
@@ -24,19 +25,26 @@ const publicNavItems = [
   { path: "/clubs", label: "Clubs", icon: Drama },
 ];
 
+const profileMenuItems = [
+  { path: "/profil", label: "Mon Profil", icon: UserRound, key: "profile" },
+  { path: undefined, label: "Se Déconnecter", icon: LogOut, key: "logout" },
+];
+
+
 export function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
   const pathname = usePathname();
   const router = useRouter();
   const { isLoggedIn, isLoading } = useAuth();
+  let isPageLogin = false;
 
   // Show only public nav items if not logged in
   const navItems = isLoggedIn ? allNavItems : publicNavItems;
 
   // Don't show navbar on login page
   if (pathname === '/login' || isLoading) {
-    return null;
+    isPageLogin = true;
   }
 
   return (
@@ -131,7 +139,7 @@ export function NavBar() {
           <NavbarItem className="hidden sm:flex items-center gap-3">
             <SwitchDarkMode />
             {isLoggedIn && <ProfilMenu />}
-            {!isLoggedIn && (
+            {!isLoggedIn && !isPageLogin && (
               <Button
                 onClick={() => router.push('/login')}
                 className="bg-secondary hover:bg-secondary/90 text-background font-semibold"
@@ -145,7 +153,7 @@ export function NavBar() {
           <NavbarItem className="sm:hidden flex items-center gap-2">
             <SwitchDarkMode />
             {isLoggedIn && <ProfilMenu />}
-            {!isLoggedIn && (
+            {!isLoggedIn && !isPageLogin && (
               <Button
                 onClick={() => router.push('/login')}
                 className="bg-secondary hover:bg-secondary/90 text-background font-semibold"
@@ -215,11 +223,22 @@ function ProfilMenu() {
 
   const handleLogout = () => {
     logout();
-    router.push('/login');
+    router.push('/');
+  };
+
+  const handleMenuAction = (item: (typeof profileMenuItems)[number]) => {
+    if (item.key === 'profile' && item.path) {
+      router.push(item.path);
+    } else if (item.key === 'logout') {
+      handleLogout();
+    }
   };
 
   return (
-    <Dropdown placement="bottom-end">
+    <Dropdown 
+      placement="bottom-end" 
+      className="bg-primary border border-default-200 shadow-sm dark:shadow-xl rounded-lg w-48"
+    >
       <DropdownTrigger>
         <Button
           isIconOnly
@@ -228,30 +247,30 @@ function ProfilMenu() {
           <UserRound size={20} />
         </Button>
       </DropdownTrigger>
-      <DropdownMenu aria-label="Profile Actions" variant="flat">
+      <DropdownMenu aria-label="Profile Actions" variant="flat"
+      >
         <DropdownItem
-          key="profile"
+          key="user-info"
           className="h-14 gap-2"
           textValue={user?.firstName || 'Mon Profil'}
         >
           <p className="font-semibold">{user?.firstName} {user?.lastName}</p>
           <p className="text-xs text-foreground/60">{user?.email}</p>
         </DropdownItem>
-        <DropdownItem
-          key="profile-page"
-          startContent={<UserRound size={16} />}
-          onClick={() => router.push('/profil')}
-        >
-          Mon Profil
-        </DropdownItem>
-        <DropdownItem
-          key="logout"
-          color="danger"
-          startContent={<LogOut size={16} />}
-          onClick={handleLogout}
-        >
-          Se Déconnecter
-        </DropdownItem>
+        {profileMenuItems.map((item) => {
+          const IconComponent = item.icon;
+          return (
+            <DropdownItem
+              key={item.key}
+              startContent={<IconComponent size={16} />}
+              color={item.key === 'logout' ? 'danger' : 'default'}
+              onClick={() => handleMenuAction(item)}
+              textValue={item.label}
+            >
+              {item.label}
+            </DropdownItem>
+          );
+        }) as any}
       </DropdownMenu>
     </Dropdown>
   );
