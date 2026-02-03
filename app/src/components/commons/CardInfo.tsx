@@ -33,7 +33,7 @@ export function CardInfo({
   
   return (
     <Card className={cardClassName}>
-      <CardBody className={`gap-2 p-3 sm:p-6 ${className}`}>
+      <CardBody className={`gap-2 p-3 sm:p-6 justify-center ${className}`}>
         <div className="flex items-center gap-1 sm:gap-2 text-foreground text-center justify-center sm:justify-start">
           {icon && (<span className="inline-flex">{icon}</span>)}
           <span className={titleClassName}>{title}</span>

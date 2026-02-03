@@ -17,32 +17,6 @@ export interface BudgetSummary {
 
 export const budgetExample: Budget[] = [
   {
-    BudgetID: '1',
-    ClubID: 1,
-    label: 'Cotisations membres',
-    amount: 1500,
-    type: 'income',
-    date: new Date('2026-01-15'),
-    description: 'Cotisations mensuelles',
-  },
-  {
-    BudgetID: '2',
-    ClubID: 1,
-    label: 'Location salle',
-    amount: 500,
-    type: 'expense',
-    date: new Date('2026-01-10'),
-    description: 'Location pour janvier',
-  },
-  {
-    BudgetID: '3',
-    ClubID: 1,
-    label: 'Matériel',
-    amount: 200,
-    type: 'expense',
-    date: new Date('2026-01-05'),
-  },
-  {
     BudgetID: '4',
     ClubID: 1,
     label: 'Sponsoring',
@@ -52,6 +26,24 @@ export const budgetExample: Budget[] = [
     description: 'Sponsoring local',
   },
   {
+    BudgetID: '1',
+    ClubID: 1,
+    label: 'Cotisations membres',
+    amount: 1500,
+    type: 'income',
+    date: new Date('2026-01-15'),
+    description: 'Cotisations mensuelles',
+  },
+    {
+    BudgetID: '2',
+    ClubID: 1,
+    label: 'Location salle',
+    amount: 500,
+    type: 'expense',
+    date: new Date('2026-01-10'),
+    description: 'Location pour janvier',
+  },
+  {
     BudgetID: '5',
     ClubID: 1,
     label: 'Uniforme',
@@ -59,6 +51,17 @@ export const budgetExample: Budget[] = [
     type: 'expense',
     date: new Date('2026-01-08'),
   },
+  {
+    BudgetID: '3',
+    ClubID: 1,
+    label: 'Matériel',
+    amount: 200,
+    type: 'expense',
+    date: new Date('2026-01-05'),
+  },
+
+
+
   // Club 2 examples
   {
     BudgetID: '6',

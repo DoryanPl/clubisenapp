@@ -5,7 +5,7 @@ import { Card, CardBody, Input } from '@heroui/react';
 import { History, Search } from 'lucide-react';
 import { heureExample } from '@/types/Heure/Heure';
 import type { ClubID } from '@/types/Club/Club';
-import { DateSelector } from '@/components/commons/DateSelector';
+import { CalendarSelector } from '@/components/commons/CalendarSelector';
 import { FilterButton } from '@/components/commons/FilterButton';
 import { PaginationSection } from '@/components/commons/PaginationSection';
 import HeureItem from '@/components/commons/HeureItem';
@@ -108,7 +108,7 @@ export default function ListHeure(props: ClubID) {
           />
 
           <div className="flex gap-2 w-full sm:w-auto">
-            <DateSelector
+            <CalendarSelector
               value={selectedDate}
               onChange={setSelectedDate}
               onClear={() => setSelectedDate(null)}

@@ -14,24 +14,24 @@ interface PageTitleProps {
   title: string;
   description?: string;
   type?: string;
-  onSearch?: (value: string) => void;
+  selectedFilter?: Set<string>;
   filterOptions?: FilterOption[];
   filterLabel?: string;
   onFilterChange?: (selectedKeys: Set<string>) => void;
   showSearch?: boolean;
-  selectedFilter?: Set<string>;
+  onSearch?: (value: string) => void;
 }
 
 function PageTitle({ 
   title, 
   description, 
   type, 
-  onSearch,
+  selectedFilter = new Set(),
   filterOptions = [],
   filterLabel = "Filtre",
   onFilterChange,
   showSearch = true,
-  selectedFilter = new Set()
+  onSearch
 }: PageTitleProps) {
   const [filterValue, setFilterValue] = useState<Set<string>>(selectedFilter);
 
@@ -53,7 +53,7 @@ function PageTitle({
         )}
       </div>
 
-      <div className="flex items-center gap-4 w-full sm:w-auto sm:min-w-fit">
+      <div className="flex items-center gap-2 w-full sm:w-auto sm:min-w-fit">
         {showSearch ? (
           <div className="flex-1 sm:w-80 flex flex-col sm:flex-row gap-2">
             {filterOptions.length > 0 && (

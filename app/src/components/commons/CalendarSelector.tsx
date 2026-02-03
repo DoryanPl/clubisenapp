@@ -4,7 +4,7 @@ import React from 'react';
 import { Button, Calendar, Popover, PopoverTrigger, PopoverContent } from '@heroui/react';
 import { Clock } from 'lucide-react';
 
-interface DateSelectorProps {
+interface CalendarSelectorProps {
   value: any;
   onChange: (date: any) => void;
   onClear?: () => void;
@@ -20,7 +20,7 @@ interface DateSelectorProps {
   formatDate?: (date: any) => string | null;
 }
 
-export function DateSelector({
+export function CalendarSelector({
   value,
   onChange,
   onClear,
@@ -40,7 +40,7 @@ export function DateSelector({
     }
     return new Date(date.year, date.month - 1, date.day).toLocaleDateString('fr-FR');
   }
-}: DateSelectorProps) {
+}: CalendarSelectorProps) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const displayLabel = desktopLabel || placeholder;

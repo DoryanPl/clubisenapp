@@ -45,6 +45,17 @@ export function FilterButton({
     option.label.toLowerCase().includes(searchValue.toLowerCase())
   );
 
+  const selectedLabel = Array.from(selectedKeys).length > 0
+    ? options.find(opt => selectedKeys.has(opt.key))?.label || label
+    : label;
+
+  const handleSelectionChange = (keys: Set<string>) => {
+    onSelectionChange(keys);
+    if (closeOnSelect || selectionMode === 'single') {
+      setIsOpen(false);
+    }
+  };
+
   return (
     <div className={className}>
         <Dropdown 
@@ -55,13 +66,13 @@ export function FilterButton({
             <DropdownTrigger>
                 <Button className={buttonClassName}>
                 {icon}
-                <span>{label}</span>
+                <span>{selectedLabel}</span>
                 </Button>
             </DropdownTrigger>
             {isOpen && (
               <DropdownMenu
                   selectedKeys={selectedKeys}
-                  onSelectionChange={(keys) => onSelectionChange(keys as Set<string>)}
+                  onSelectionChange={(keys) => handleSelectionChange(keys as Set<string>)}
                   selectionMode={selectionMode}
                   disallowEmptySelection={disallowEmptySelection}
                   closeOnSelect={closeOnSelect}
