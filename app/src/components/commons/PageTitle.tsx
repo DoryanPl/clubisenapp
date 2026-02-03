@@ -52,51 +52,6 @@ function PageTitle({
           </p>
         )}
       </div>
-
-      <div className="flex items-center gap-4 w-full sm:w-auto sm:min-w-fit">
-        {showSearch ? (
-          <div className="flex-1 sm:w-80 flex flex-col sm:flex-row gap-2">
-            {filterOptions.length > 0 && (
-              <FilterButton
-                label={filterLabel}
-                options={filterOptions}
-                selectedKeys={filterValue}
-                onSelectionChange={handleFilterChange}
-                closeOnSelect={false}
-                disallowEmptySelection={false}
-                selectionMode="single" 
-                className="flex-1 sm:flex-none"
-              />
-            )}
-
-            <Input
-              isClearable
-              radius="lg"
-              placeholder={`Rechercher un ${type}...`}
-              startContent={<Search size={18} />}
-              onValueChange={(value) => onSearch?.(value)}
-              classNames={{
-                inputWrapper: "border border-default-100 shadow-sm dark:shadow-xl bg-primary focus-within:bg-primary",
-              }}
-            />
-          </div>
-        ) : (
-          filterOptions.length > 0 && (
-            <FilterButton
-              label={filterLabel}
-              options={filterOptions}
-              selectedKeys={filterValue}
-              onSelectionChange={handleFilterChange}
-              closeOnSelect={false}
-              className="flex-1 sm:flex-none"
-            />
-          )
-        )}
-
-        <Button color="secondary" className="text-white bg-secondary/80 font-bold whitespace-nowrap flex-shrink-0" startContent={<Plus size={20} />}>
-          <span className="hidden sm:inline">Créer un {type}</span>
-        </Button>
-      </div>
     </div>
   );
 };
